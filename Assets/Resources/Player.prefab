@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 5843647755640194174}
   - component: {fileID: 5156959582067942968}
   - component: {fileID: 450652522538474798}
-  - component: {fileID: 1486308778334696742}
   - component: {fileID: 3726763170975006120}
   - component: {fileID: 2571906533744951717}
   - component: {fileID: 8187418821332012352}
   - component: {fileID: 8803205775018023479}
   - component: {fileID: 224231708062103812}
+  - component: {fileID: 8053714488514251183}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -147,27 +147,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 1486308778334696742}
   - {fileID: 224231708062103812}
+  - {fileID: 8053714488514251183}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1486308778334696742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090748408087131110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
 --- !u!60 &3726763170975006120
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -288,3 +272,19 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
+--- !u!114 &8053714488514251183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090748408087131110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
