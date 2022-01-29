@@ -7,6 +7,5 @@ namespace GGJ2022.Source.Scripts.Game.Configs
     public class BulletConfig
     {
         public float BulletSpeed;
-        public LayerMask BulletLayerMask;
     }
 }
