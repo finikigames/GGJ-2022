@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PlayerConfigInstaller
   m_EditorClassIdentifier: 
   PlayerConfig:
-    MoveSpeed: 5
+    MoveSpeed: 3
     RotationSpeed: 0
     FireDistance: 10
     ShootDelay: 1
     StateSwitchDelay: 2
     Health: 100
-    Damage: 20
-    EnemyHeal: 5
-    AllyHeal: 10
-    FriendlyFireDamage: 20
+    Damage: 25
+    EnemyHeal: 10
+    AllyHeal: 15
+    FriendlyFireDamage: 10

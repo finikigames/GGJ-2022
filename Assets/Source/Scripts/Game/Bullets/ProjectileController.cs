@@ -110,7 +110,9 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                     var gameObjectOther = other.gameObject.GetComponent<PhotonView>();
 
                     var playerTypeController = gameObjectOther.GetComponent<PlayerTypeController>();
-
+                    
+                    gameObjectOther.RPC("PlayHitSound", RpcTarget.All);
+                    
                     _teamsManager.TryGetTeamMatesOfPlayer(PhotonView.Controller, out var teamMates);
 
                     var otherPlayer = gameObjectOther.Controller;
