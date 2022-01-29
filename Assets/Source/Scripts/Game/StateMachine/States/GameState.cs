@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Game.ECS;
 using GGJ2022.Source.Scripts.Game.Configs;
+using GGJ2022.Source.Scripts.Game.Services;
 using GGJ2022.Source.Scripts.Game.Services.CameraResolve.Base;
 using GGJ2022.Source.Scripts.Game.StateMachine.States.Base;
 using Photon.Pun;
@@ -18,26 +19,28 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
         private readonly ICameraResolveService _cameraResolveService;
         private readonly EcsStartup _ecsStartup;
         private readonly PhotonTeamsManager _photonTeamsManager;
+        private readonly PlayerService _playerService;
 
         public GameState(GameConfig gameConfig,
                          GameScope gameScope,
                          ICameraResolveService cameraResolveService,
                          EcsStartup ecsStartup,
-                         PhotonTeamsManager photonTeamsManager)
+                         PhotonTeamsManager photonTeamsManager,
+                         PlayerService playerService)
         {
             _gameConfig = gameConfig;
             _gameScope = gameScope;
             _cameraResolveService = cameraResolveService;
             _ecsStartup = ecsStartup;
             _photonTeamsManager = photonTeamsManager;
+            _playerService = playerService;
         }
         
         public void OnEntry()
         {
             _ecsStartup.RegisterRunner();
-            _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, Vector3.zero, Quaternion.identity);
+            _playerService.EnterRandomTeam();
             _cameraResolveService.Resolve();
-            EnterRandomTeam();
         }
 
         public void OnExit()
@@ -55,21 +58,6 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
             
         }
 
-        private void EnterRandomTeam()
-        {
-            PhotonTeam[] teams = _photonTeamsManager.GetAvailableTeams();
-            var avaliableTeams = new List<byte>();
-            foreach (var team in teams)
-            {
-                _photonTeamsManager.TryGetTeamMembers(team, out var players);
-                var playersInTeam = _gameConfig.PlayersToStartGame / 2;
-                if (players.Length < (playersInTeam > 0 ? playersInTeam : 1))
-                {
-                    avaliableTeams.Add(team.Code);
-                }
-            }
- 
-            PhotonNetwork.LocalPlayer.JoinTeam(avaliableTeams[Random.Range(0, 2)]);
-        }
+        
     }
 }
