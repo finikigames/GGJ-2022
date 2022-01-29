@@ -42,13 +42,11 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private void Shoot()
         {
-            var currentType = PlayerTypeController.State;
-            var playerId = PhotonView.Owner.UserId;
-            
+            var currentType = PlayerTypeController.Type;
+           
             var bullet = PhotonNetwork.Instantiate(_gameConfig.BulletPrefab.name, transform.position, quaternion.identity);
             var projectileController = bullet.GetComponent<ProjectileController>();
-            
-
+            projectileController.Initialize(currentType);
         }
     }
 }

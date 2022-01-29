@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25e674abce054cc086c0844e89212989, type: 3}
-  m_Name: BulletConfigInstaller
+  m_Script: {fileID: 188390376, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
+  m_Name: ImportSettingsConfig
   m_EditorClassIdentifier: 
-  BulletConfig:
-    BulletSpeed: 5
-    DestroyBulletLayers:
-      serializedVersion: 2
-      m_Bits: 0
+  automateBeforeBuild: 1
