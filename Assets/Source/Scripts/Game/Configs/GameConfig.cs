@@ -6,7 +6,10 @@ namespace GGJ2022.Source.Scripts.Game.Configs
     [Serializable]
     public class GameConfig
     {
-        public int PlayersToStartGame;
+        public int PlayersToStartGame = 4;
         public GameObject PlayerPrefab;
+        public GameObject BulletPrefab;
+        public bool IsEnemyHeal;
+        public bool FriendlyFire;
     }
 }
