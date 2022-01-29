@@ -49,6 +49,9 @@ MonoBehaviour:
   - DeleteBullet
   - RPC_GetTeam
   - ShowDeathAnimation
+  - UpdateBulletRotation
+  - RPC_CurrentHealth
+  - UpdateBulletType
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

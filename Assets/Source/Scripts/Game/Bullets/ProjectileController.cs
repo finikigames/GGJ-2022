@@ -50,23 +50,24 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             _gameConfig = gameConfig;
         }
 
-        private void Start()
+        private void LocalInitialize()
         {
-            if (!PhotonView.IsMine)
-            {
-                Destroy(Rigidbody2D);
-                Destroy(Collider);
-            }
+            Destroy(Rigidbody2D);
+            Destroy(Collider);
 
             _currentState ??= _currentState = StateViews[BulletState];
             _currentState.Attack.gameObject.SetActive(true);
-            
-            if (PhotonView.IsMine)
-            {
-                UpdateBulletRotation(_direciton);
-                PhotonView.RPC("UpdateBulletRotation", RpcTarget.Others, _direciton);
-            }
-            
+        }
+
+        public void Initialize(ObjectState initialState)
+        {
+            BulletState = initialState;
+           
+            _currentState ??= _currentState = StateViews[BulletState];
+            _currentState.Attack.gameObject.SetActive(true);
+            UpdateBulletRotation(_direciton);
+            PhotonView.RPC("UpdateBulletType", RpcTarget.Others, initialState);
+            PhotonView.RPC("UpdateBulletRotation", RpcTarget.Others, _direciton);
             _enableCollision = true;
         }
 
@@ -76,10 +77,20 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-        
-        public void Initialize(ObjectState initialState)
+
+        [PunRPC]
+        private void ShowDeathAnimation()
         {
-            BulletState = initialState;
+            _currentState.Attack.gameObject.SetActive(false);
+            _currentState.Hit.gameObject.SetActive(true);
+        }
+
+        [PunRPC]
+        private void UpdateBulletType(ObjectState state)
+        {
+            BulletState = state;
+
+            LocalInitialize();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -134,13 +145,6 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             }
         }
 
-        [PunRPC]
-        private void ShowDeathAnimation()
-        {
-            _currentState.Attack.gameObject.SetActive(false);
-            _currentState.Hit.gameObject.SetActive(true);
-        }
-        
         private void Update()
         {
             _currentState ??= _currentState = StateViews[BulletState];
@@ -151,10 +155,12 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                 transform.position += _direciton * _bulletConfig.BulletSpeed * Time.deltaTime;
             }
 
-            if (PhotonView.IsMine && isDistanceExceed)
+            if (PhotonView.IsMine && isDistanceExceed & !_isDead)
             {
                 _isDead = true;
                 
+                _currentState.Attack.gameObject.SetActive(false);
+                _currentState.Hit.gameObject.SetActive(true);
                 PhotonView.RPC("ShowDeathAnimation", RpcTarget.Others);
                 _currentState.Hit.AnimationState.Complete += _ =>
                 {
