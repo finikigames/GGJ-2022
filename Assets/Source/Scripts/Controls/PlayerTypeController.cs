@@ -14,7 +14,7 @@ namespace GGJ2022.Source.Scripts.Controls
         public PhotonView PhotonView;
         public Animator Animator;
         
-        public ObjectState State;
+        public ObjectState Type;
         public AnimatorController FirstStateView;
         public AnimatorController SecondStateView;
 
@@ -56,7 +56,7 @@ namespace GGJ2022.Source.Scripts.Controls
             if (_ready)
             {
                 InvertState();
-                PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, State);
+                PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, Type);
 
                 StartTimer();
                 _ready = false;
@@ -66,13 +66,13 @@ namespace GGJ2022.Source.Scripts.Controls
         [PunRPC]
         private void ChangeTypeRemote(ObjectState state)
         {
-            State = state;
-            SpriteRenderer.color = State == ObjectState.First ? Color.white : Color.red;
+            Type = state;
+            SpriteRenderer.color = Type == ObjectState.First ? Color.white : Color.red;
         }
         
         private void InvertState()
         {
-            State = State == ObjectState.First ? ObjectState.Second : ObjectState.First;
+            Type = Type == ObjectState.First ? ObjectState.Second : ObjectState.First;
         }
     }
 }

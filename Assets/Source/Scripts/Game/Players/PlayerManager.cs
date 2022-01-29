@@ -94,28 +94,34 @@ namespace GGJ2022.Source.Scripts.Game.Players
             }
         }
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity on every frame.
-        /// Process Inputs if local player.
-        /// Show and hide the beams
-        /// Watch for end of game, when local player health is 0.
-        /// </summary>
-        public void Update()
+        public void Heal(float heal)
         {
-            // we only process Inputs and check health if we are the local player
+            if (_health + heal < 100)
+            {
+                _health += heal;
+            }
+            else
+            {
+                _health = 100;
+            }
+            
             _healthBar.SetHealth(_health);
+        }
 
+        public void Damage(float damage)
+        {
+            _health -= damage;
+            _healthBar.SetHealth(_health);
+            
             if (photonView.IsMine)
             {
-                this.ProcessInputs();
-                
-                if (this._health <= 0f)
+                if (_health <= 0f)
                 {
                     PhotonNetwork.LeaveRoom();
                 }
             }
         }
+
         void CalledOnLevelWasLoaded(int level)
         {
             // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
@@ -139,35 +145,6 @@ namespace GGJ2022.Source.Scripts.Game.Players
 			this.CalledOnLevelWasLoaded(scene.buildIndex);
 		}
 		#endif
-
-        /// <summary>
-        /// Processes the inputs. This MUST ONLY BE USED when the player has authority over this Networked GameObject (photonView.isMine == true)
-        /// </summary>
-        void ProcessInputs()
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                // we don't want to fire when we interact with UI buttons for example. IsPointerOverGameObject really means IsPointerOver*UI*GameObject
-                // notice we don't use on on GetbuttonUp() few lines down, because one can mouse down, move over a UI element and release, which would lead to not lower the isFiring Flag.
-                if (EventSystem.current.IsPointerOverGameObject())
-                {
-                    //	return;
-                }
-
-                if (!this.IsFiring)
-                {
-                    this.IsFiring = true;
-                }
-            }
-
-            if (Input.GetButtonUp("Fire1"))
-            {
-                if (this.IsFiring)
-                {
-                    this.IsFiring = false;
-                }
-            }
-        }
 
         #endregion
 
