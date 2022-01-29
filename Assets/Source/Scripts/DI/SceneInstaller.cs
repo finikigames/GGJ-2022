@@ -1,8 +1,10 @@
 ﻿using GGJ2022.Source.Scripts.Controls;
+using GGJ2022.Source.Scripts.Game.ECS;
 using GGJ2022.Source.Scripts.Game;
 using GGJ2022.Source.Scripts.Game.StateMachine;
 using GGJ2022.Source.Scripts.Game.StateMachine.States;
 using Photon.Pun.UtilityScripts;
+using Source.Scripts.Core.Ticks;
 using Zenject;
 
 namespace GGJ2022.Source.Scripts.DI
@@ -12,11 +14,18 @@ namespace GGJ2022.Source.Scripts.DI
         public JoystickControlInfo JoystickControlInfo;
         public PhotonTeamsManager TeamsManager;
         public InitState InitState;
+        public UpdateService UpdateService;
 
         public override void InstallBindings()
         {
-            StateInstaller.Install(Container);
+            Container
+                .Bind<EcsStartup>()
+                .AsSingle();
 
+            Container
+                .BindInstance(UpdateService)
+                .AsSingle();
+            
             Container
                 .BindInterfacesAndSelfTo<Game.Services.Game>()
                 .AsSingle();
@@ -40,6 +49,8 @@ namespace GGJ2022.Source.Scripts.DI
             Container
                 .BindInterfacesAndSelfTo<GameStateMachine>()
                 .AsSingle();
+            
+            StateInstaller.Install(Container);
         }
     }
 }

@@ -6,7 +6,6 @@ namespace GGJ2022.Source.Scripts.DI
     {
         public override void InstallBindings()
         {
-            
         }
     }
 }
