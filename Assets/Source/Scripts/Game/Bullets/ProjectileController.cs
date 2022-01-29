@@ -103,15 +103,9 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                     else if (isNotBulletState)
                         playerManager.Damage(_playerConfig.Damage);
                 }
-
-                _isDead = true;
-                _currentState.Hit.AnimationState.Complete += entry =>
-                {
-                    PhotonNetwork.Destroy(gameObject);
-                };
             }
 
-            if (PhotonView.IsMine && !isPlayerCollision)
+            if (PhotonView.IsMine)
             {
                 _isDead = true;
                 _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject);};
