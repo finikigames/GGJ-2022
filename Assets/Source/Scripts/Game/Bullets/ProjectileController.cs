@@ -48,7 +48,6 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         public void Initialize(ObjectState initialState)
         {
             BulletState = initialState;
-            _currentState = StateViews[initialState];
             _currentState.Attack.gameObject.SetActive(true);
             float angle = Mathf.Atan2(_direciton.y, _direciton.x) * Mathf.Rad2Deg;
             _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -56,6 +55,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            _currentState ??= _currentState = StateViews[BulletState];
             var isPlayerCollision = other.gameObject.layer == LayerMask.NameToLayer(PlayerLayerController.OtherLayer);
 
             _currentState.Attack.gameObject.SetActive(false);
@@ -111,6 +111,8 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
         private void Update()
         {
+            _currentState ??= _currentState = StateViews[BulletState];
+            
             var isDistanceExceed = Vector2.Distance(transform.position, _startPosition) > _playerConfig.FireDistance;
             if (PhotonView.IsMine &&  !isDistanceExceed && !_isDead)
             {
