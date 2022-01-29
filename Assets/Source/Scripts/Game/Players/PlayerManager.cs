@@ -98,7 +98,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 _health = 100;
             }
             
-            if (photonView.IsMine)
+            if (!photonView.IsMine)
             {
                 photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
             }
@@ -111,7 +111,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
             _health -= damage;
             _healthBar.SetHealth(_health);
             
-            if (photonView.IsMine)
+            if (!photonView.IsMine)
             {
                 photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
                 
