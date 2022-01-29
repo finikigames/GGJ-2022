@@ -2,7 +2,6 @@
 using GGJ2022.Source.Scripts.Game.Bullets;
 using GGJ2022.Source.Scripts.Game.Configs;
 using Photon.Pun;
-using Photon.Pun.Demo.Asteroids;
 using UniRx;
 using Unity.Mathematics;
 using UnityEngine;
@@ -45,6 +44,7 @@ namespace GGJ2022.Source.Scripts.Controls
                         {
                             Shoot();
                             _ready = false;
+                            StartTimer();
                         });
             }
         }
