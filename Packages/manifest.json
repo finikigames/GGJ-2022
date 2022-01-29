@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.leopotam.ecslite": "https://github.com/odingamesdev/ecslite.git",
+    "com.leopotam.ecslite.extendedfilters": "https://github.com/Leopotam/ecslite-extendedfilters.git",
     "com.odingames.native-ecslite": "https://github.com/odingamesdev/native-ecslite.git",
     "com.unity.2d.animation": "7.0.3",
     "com.unity.2d.tilemap": "1.0.0",
@@ -21,6 +22,7 @@
     "com.unity.timeline": "1.6.3",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.7.6",
+    "com.voody.unileo.lite": "https://github.com/voody2506/UniLeo-Lite.git",
     "com.wwnb.aurora": "https://github.com/antontidev/aurora.git",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
