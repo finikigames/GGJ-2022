@@ -153,7 +153,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
             }
         }
 
-        private void Update()
+        void CheckHealth()
         {
             if (PhotonView.IsMine && _health <= 0f)
             {
@@ -166,6 +166,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
         {
             _health = whichHealth;
             _healthBar.SetHealth(_health);
+            CheckHealth();
         }
     }
 }
