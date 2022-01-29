@@ -104,60 +104,18 @@ namespace GGJ2022.Source.Scripts.Game.Players
         public void Update()
         {
             // we only process Inputs and check health if we are the local player
+            _healthBar.SetHealth(_health);
+
             if (photonView.IsMine)
             {
                 this.ProcessInputs();
-
-                _healthBar.SetHealth(_health);
-
+                
                 if (this._health <= 0f)
                 {
                     PhotonNetwork.LeaveRoom();
                 }
             }
         }
-        public void OnTriggerEnter(Collider other)
-        {
-            if (!photonView.IsMine)
-            {
-                return;
-            }
-
-            this._health -= 0.1f;
-        }
-
-        /// <summary>
-        /// MonoBehaviour method called once per frame for every Collider 'other' that is touching the trigger.
-        /// We're going to affect health while the beams are interesting the player
-        /// </summary>
-        /// <param name="other">Other.</param>
-        public void OnTriggerStay(Collider other)
-        {
-            // we dont' do anything if we are not the local player.
-            if (!photonView.IsMine)
-            {
-                return;
-            }
-
-            // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
-            this._health -= 0.1f*Time.deltaTime;
-        }
-
-
-        #if !UNITY_5_4_OR_NEWER
-        /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
-        void OnLevelWasLoaded(int level)
-        {
-            this.CalledOnLevelWasLoaded(level);
-        }
-        #endif
-
-        /// <summary>
-        /// MonoBehaviour method called after a new level of index 'level' was loaded.
-        /// We recreate the Player UI because it was destroy when we switched level.
-        /// Also reposition the player if outside the current arena.
-        /// </summary>
-        /// <param name="level">Level index loaded</param>
         void CalledOnLevelWasLoaded(int level)
         {
             // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
