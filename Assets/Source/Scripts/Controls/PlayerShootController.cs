@@ -1,8 +1,10 @@
 ﻿using System;
+using GGJ2022.Source.Scripts.Game.Bullets;
 using GGJ2022.Source.Scripts.Game.Configs;
 using Photon.Pun;
 using Photon.Pun.Demo.Asteroids;
 using UniRx;
+using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +17,8 @@ namespace GGJ2022.Source.Scripts.Controls
         private GameConfig _gameConfig;
 
         public PhotonView PhotonView;
+        public PlayerTypeController PlayerTypeController;
+        
         
         [Inject]
         public void Construct(BulletConfig bulletConfig,
@@ -38,7 +42,13 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private void Shoot()
         {
+            var currentType = PlayerTypeController.State;
+            var playerId = PhotonView.Owner.UserId;
             
+            var bullet = PhotonNetwork.Instantiate(_gameConfig.BulletPrefab.name, transform.position, quaternion.identity);
+            var projectileController = bullet.GetComponent<ProjectileController>();
+            
+
         }
     }
 }
