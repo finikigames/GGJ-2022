@@ -48,8 +48,8 @@ namespace GGJ2022.Source.Scripts.Controls
                 _lineRenderer.enabled = true;
             }
             
-            var heroPosition = transform.position;
-            
+            var heroPosition = new Vector2(transform.position.x, transform.position.y);
+
             _lineRenderer.SetPosition(0, heroPosition);
             var linePos = new Vector2(heroPosition.x, heroPosition.y);
             linePos += _controlInfo.FireJoystick.Direction * _playerConfig.FireDistance;
