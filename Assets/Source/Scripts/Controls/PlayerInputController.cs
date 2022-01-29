@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
 
@@ -9,20 +10,19 @@ namespace Controls
         public Rigidbody2D Rigidbody;
         //Temporary
         public float _moveSpeed = 25f;
+        public float Horizontal;
+        public float Vertical;
+        public Vector2 Movement;
         
-        // Start is called before the first frame update
-        void Start()
+        private void FixedUpdate()
         {
-        
-        }
-        
-        void FixedUpdate()
-        {
+            Horizontal = _joysticks.MovementJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f;
+            Vertical = _joysticks.MovementJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f;
             Vector2 newPos = new Vector2(
-                _joysticks.MovementJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f,
-                _joysticks.MovementJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f);
-            var move = Vector2.ClampMagnitude(newPos, 1) * _moveSpeed * Time.fixedDeltaTime + Rigidbody.position;
-            Rigidbody.MovePosition(move);
+                Horizontal,
+                Vertical);
+            Movement = Vector2.ClampMagnitude(newPos, 1);
+            Rigidbody.MovePosition(Movement * _moveSpeed * Time.fixedDeltaTime + Rigidbody.position);
         }
     }
 }
