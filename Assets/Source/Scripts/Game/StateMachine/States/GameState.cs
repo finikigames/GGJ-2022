@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Game.ECS;
 using GGJ2022.Source.Scripts.Game.Configs;
+using GGJ2022.Source.Scripts.Game.Players;
 using GGJ2022.Source.Scripts.Game.Services;
 using GGJ2022.Source.Scripts.Game.Services.CameraResolve.Base;
 using GGJ2022.Source.Scripts.Game.StateMachine.States.Base;
@@ -20,13 +21,15 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
         private readonly EcsStartup _ecsStartup;
         private readonly PhotonTeamsManager _photonTeamsManager;
         private readonly PlayerService _playerService;
+        private readonly PlayerManager _playerManager;
 
         public GameState(GameConfig gameConfig,
                          GameScope gameScope,
                          ICameraResolveService cameraResolveService,
                          EcsStartup ecsStartup,
                          PhotonTeamsManager photonTeamsManager,
-                         PlayerService playerService)
+                         PlayerService playerService,
+                         PlayerManager playerManager)
         {
             _gameConfig = gameConfig;
             _gameScope = gameScope;
@@ -34,6 +37,7 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
             _ecsStartup = ecsStartup;
             _photonTeamsManager = photonTeamsManager;
             _playerService = playerService;
+            _playerManager = playerManager;
         }
         
         public void OnEntry()
