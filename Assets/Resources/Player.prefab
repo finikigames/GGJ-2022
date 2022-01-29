@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 224231708062103812}
   - component: {fileID: 4898664510049294616}
   - component: {fileID: 6933363067827298135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,6 +396,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: LineRenderer
       objectReference: {fileID: 0}
+    - target: {fileID: 5735173678555392315, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.alignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.generateLightingData
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436796082299403253, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: Raycast
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7436796082299403253, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
       propertyPath: photonView
       value: 
@@ -404,6 +428,14 @@ PrefabInstance:
       propertyPath: _lineRenderer
       value: 
       objectReference: {fileID: 1698800610873376546}
+    - target: {fileID: 7436796082299403253, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: ContactFilter2D.useLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436796082299403253, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: ContactFilter2D.layerMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
 --- !u!120 &1698800610873376546 stripped
