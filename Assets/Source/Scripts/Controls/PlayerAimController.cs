@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Game.Configs;
 using Photon.Pun;
 using UnityEngine;
@@ -12,8 +13,8 @@ namespace GGJ2022.Source.Scripts.Controls
         
         public PhotonView photonView;
         public LineRenderer _lineRenderer;
-        public GameObject Raycast;
         private float _distanceObj;
+        public ContactFilter2D ContactFilter2D;
         
         [Inject]
         public void Construct(JoystickControlInfo controlInfo,
@@ -48,20 +49,27 @@ namespace GGJ2022.Source.Scripts.Controls
                 _lineRenderer.enabled = true;
             }
             
-            var position = transform.position;
-            _lineRenderer.SetPosition(0, position);
-            var linePos = new Vector2(position.x, position.y);
-            RaycastHit hit;
-            if (Physics.Raycast(Raycast.transform.position, Raycast.transform.forward, out hit))
-            {
-                if (hit.collider != null)
-                {
-                    transform.localPosition = new Vector3(1f, 1f, _distanceObj);
-                }
-                _distanceObj = hit.distance;
-            }
+            var heroPosition = transform.position;
             
+            _lineRenderer.SetPosition(0, heroPosition);
+            var linePos = new Vector2(heroPosition.x, heroPosition.y);
             linePos += (firePos.normalized * _playerConfig.FireDistance);
+            List<RaycastHit2D> results = new List<RaycastHit2D>(1);
+            var hitsCount = Physics2D.Raycast(heroPosition, linePos, ContactFilter2D, results);
+            
+            if (hitsCount > 0)
+            {
+                var hit = results[0];
+
+                if (hit.distance < _playerConfig.FireDistance)
+                {
+                    //linePos = hit.point;
+
+                    linePos = new Vector2(heroPosition.x, heroPosition.y);
+                    linePos += (firePos.normalized * hit.distance);
+                }
+            }
+
             _lineRenderer.SetPosition(1, linePos);
         }
     }
