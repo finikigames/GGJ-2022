@@ -98,6 +98,11 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 _health = 100;
             }
             
+            if (photonView.IsMine)
+            {
+                photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
+            }
+            
             _healthBar.SetHealth(_health);
         }
 
@@ -108,6 +113,8 @@ namespace GGJ2022.Source.Scripts.Game.Players
             
             if (photonView.IsMine)
             {
+                photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
+                
                 if (_health <= 0f)
                 {
                     PhotonNetwork.LeaveRoom();
@@ -160,9 +167,10 @@ namespace GGJ2022.Source.Scripts.Game.Players
         }
 
         [PunRPC]
-        void RPC_CurrentHealth()
+        void RPC_CurrentHealth(float whichHealth)
         {
-            
+            _health = whichHealth;
+            _healthBar.SetHealth(_health);
         }
     }
 }
