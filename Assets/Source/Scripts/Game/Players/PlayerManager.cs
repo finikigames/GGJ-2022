@@ -52,6 +52,8 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         #endregion
 
+        private bool _isLeft = false;
+        
         #region Private Fields
 
         [Tooltip("The Player's UI GameObject Prefab")]
@@ -140,6 +142,11 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         #endregion
 
+        public override void OnLeftRoom()
+        {
+            _isLeft = true;
+        }
+
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
@@ -155,7 +162,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         void CheckHealth()
         {
-            if (PhotonView.IsMine && _health <= 0f)
+            if (PhotonView.IsMine && !_isLeft && _health <= 0f)
             {
                 PhotonNetwork.LeaveRoom();
             }
