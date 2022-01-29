@@ -48,6 +48,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         public void Initialize(ObjectState initialState)
         {
             BulletState = initialState;
+            _currentState ??= _currentState = StateViews[BulletState];
             _currentState.Attack.gameObject.SetActive(true);
             float angle = Mathf.Atan2(_direciton.y, _direciton.x) * Mathf.Rad2Deg;
             _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
