@@ -4,10 +4,11 @@ using Leopotam.EcsLite;
 using Source.Scripts.Core.Ticks;
 using Source.Scripts.Core.Ticks.Interfaces;
 using Voody.UniLeo.Lite;
+using Zenject;
 
 namespace GGJ2022.Source.Scripts.Game.ECS
 {
-    public class EcsStartup : IUpdatable, IEcsStartup
+    public class EcsStartup : IInitializable, IUpdatable, IEcsStartup
     {
         private UpdateService _updateService;
 
@@ -31,6 +32,8 @@ namespace GGJ2022.Source.Scripts.Game.ECS
                 .Add(new BulletCreateSystem())
                 .Add(new BulletMovementSystem());
             _gameScope.World = _world;
+            
+            _systems.Init();
         }
 
         public void CustomUpdate()
