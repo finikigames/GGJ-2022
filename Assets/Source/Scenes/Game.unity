@@ -1149,6 +1149,7 @@ MonoBehaviour:
   JoystickControlInfo: {fileID: 1984021182}
   TeamsManager: {fileID: 1233215698}
   InitState: {fileID: 1718003832}
+  UpdateService: {fileID: 697112996}
 --- !u!1 &1107754851
 GameObject:
   m_ObjectHideFlags: 0
