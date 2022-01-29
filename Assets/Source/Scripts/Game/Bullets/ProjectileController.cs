@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Controls;
 using GGJ2022.Source.Scripts.Game.Configs;
@@ -18,7 +19,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         
         public PhotonView PhotonView;
 
-        public Collider Collider;
+        public Collider2D Collider;
 
         private Vector3 _direciton;
         private Vector3 _startPosition;
@@ -47,6 +48,14 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             _gameConfig = gameConfig;
         }
 
+        private void Start()
+        {
+            if (!PhotonView.IsMine)
+            {
+                Collider.enabled = false;
+            }
+        }
+
         public void Initialize(ObjectState initialState)
         {
             BulletState = initialState;
@@ -54,11 +63,6 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             _currentState.Attack.gameObject.SetActive(true);
             float angle = Mathf.Atan2(_direciton.y, _direciton.x) * Mathf.Rad2Deg;
             _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            if (!PhotonView.IsMine)
-            {
-                Collider.enabled = false;
-            }
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -110,10 +114,10 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             if (PhotonView.IsMine && !isPlayerCollision)
             {
                 _isDead = true;
-                _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject); };
+                _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject);};
             }
         }
-
+        
         private void Update()
         {
             _currentState ??= _currentState = StateViews[BulletState];
