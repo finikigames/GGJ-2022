@@ -58,13 +58,14 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                 Destroy(Collider);
             }
 
+            _currentState ??= _currentState = StateViews[BulletState];
+            _currentState.Attack.gameObject.SetActive(true);
+            
             if (PhotonView.IsMine)
             {
                 UpdateBulletRotation(_direciton);
                 PhotonView.RPC("UpdateBulletRotation", RpcTarget.Others, _direciton);
             }
-            _currentState ??= _currentState = StateViews[BulletState];
-            _currentState.Attack.gameObject.SetActive(true);
             
             _enableCollision = true;
         }
