@@ -13,7 +13,8 @@ namespace GGJ2022.Source.Scripts.Game.Services
         private readonly GameScope _gameScope;
         private readonly PhotonTeamsManager _photonTeamsManager;
         private readonly TeamSpawnPoints _teamSpawnPoints;
-        
+        public int NextPlayerTeams;
+
         public PlayerService(GameConfig gameConfig,
                                  GameScope gameScope,
                                  PhotonTeamsManager photonTeamsManager,
@@ -96,6 +97,18 @@ namespace GGJ2022.Source.Scripts.Game.Services
         {
             var id = PhotonNetwork.LocalPlayer.ActorNumber;
             _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, _teamSpawnPoints.Deathmatch[id-1].position, Quaternion.identity);
+        }
+
+        public void UpdateTeam()
+        {
+            if (NextPlayerTeams == 1)
+            {
+                NextPlayerTeams = 2;
+            }
+            else
+            {
+                NextPlayerTeams = 1;
+            }
         }
     }
 }

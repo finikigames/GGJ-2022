@@ -8,7 +8,9 @@
 // <author>developer@exitgames.com</author>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using GGJ2022.Source.Scripts.Game.Configs;
+using GGJ2022.Source.Scripts.Game.Services;
 using GGJ2022.Source.Scripts.UI.Player;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
@@ -28,13 +30,18 @@ namespace GGJ2022.Source.Scripts.Game.Players
     {
         #region Public Fields
 
+        public PhotonView PhotonView;
         private PlayerConfig _playerConfig;
+        private PlayerService _playerService;
         private HealthBar _healthBar;
+        private int _myTeam;
 
         [Inject]
-        public void Construct(PlayerConfig playerConfig)
+        public void Construct(PlayerConfig playerConfig,
+                              PlayerService playerService)
         {
             _playerConfig = playerConfig;
+            _playerService = playerService;
         }
 
         [Tooltip("The current Health of our player")]
@@ -54,31 +61,17 @@ namespace GGJ2022.Source.Scripts.Game.Players
         //True, when the user is firing
         bool IsFiring;
 
-        #endregion
-
-        #region MonoBehaviour CallBacks
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
-        /// </summary>
         public void Awake()
         {
-            // #Important
-            // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
             if (photonView.IsMine)
             {
                 LocalPlayerInstance = gameObject;
                 _health = _playerConfig.Health;
             }
 
-            // #Critical
-            // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
             DontDestroyOnLoad(gameObject);
         }
 
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-        /// </summary>
         public void Start()
         {
             // Create the UI
@@ -148,7 +141,6 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         #endregion
 
-        #region IPunObservable implementation
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
@@ -166,6 +158,15 @@ namespace GGJ2022.Source.Scripts.Game.Players
             }
         }
 
-        #endregion
+        private void Update()
+        {
+            
+        }
+
+        [PunRPC]
+        void RPC_GetTeam()
+        {
+            _myTeam = _playerService.NextPlayerTeams;
+        }
     }
 }
