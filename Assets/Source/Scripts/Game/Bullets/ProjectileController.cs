@@ -33,7 +33,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         {
             if (PhotonView.IsMine)
             {
-                Destroy(gameObject);
+                PhotonNetwork.Destroy(gameObject);
             }
         }
 
@@ -47,7 +47,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
             if (PhotonView.IsMine && isDistanceExceed)
             {
-                Destroy(gameObject);
+                PhotonNetwork.Destroy(gameObject);
             }
         }
     }
