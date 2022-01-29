@@ -3,8 +3,10 @@ using GGJ2022.Source.Scripts.Game.ECS;
 using GGJ2022.Source.Scripts.Game;
 using GGJ2022.Source.Scripts.Game.StateMachine;
 using GGJ2022.Source.Scripts.Game.StateMachine.States;
+using Photon.Pun.Demo.PunBasics;
 using Photon.Pun.UtilityScripts;
 using Source.Scripts.Core.Ticks;
+using UnityEngine;
 using Zenject;
 
 namespace GGJ2022.Source.Scripts.DI
@@ -48,6 +50,10 @@ namespace GGJ2022.Source.Scripts.DI
 
             Container
                 .BindInterfacesAndSelfTo<GameStateMachine>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesTo<PlayerManager>()
                 .AsSingle();
             
             StateInstaller.Install(Container);

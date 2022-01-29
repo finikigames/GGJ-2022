@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using GGJ2022.Source.Scripts.Game.Configs;
+using GGJ2022.Source.Scripts.UI.Player;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
         #region Public Fields
 
         private PlayerConfig _playerConfig;
+        private HealthBar _healthBar;
 
         [Inject]
         public void Construct(PlayerConfig playerConfig)
@@ -36,7 +38,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
         }
 
         [Tooltip("The current Health of our player")]
-        public float Health;
+        public float _health;
 
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
@@ -66,7 +68,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
             if (photonView.IsMine)
             {
                 LocalPlayerInstance = gameObject;
-                Health = _playerConfig.Health;
+                _health = _playerConfig.Health;
             }
 
             // #Critical
@@ -79,47 +81,18 @@ namespace GGJ2022.Source.Scripts.Game.Players
         /// </summary>
         public void Start()
         {
-            CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
-
-            if (_cameraWork != null)
-            {
-                if (photonView.IsMine)
-                {
-                    _cameraWork.OnStartFollowing();
-                }
-            }
-            else
-            {
-                Debug.LogError("<Color=Red><b>Missing</b></Color> CameraWork Component on player Prefab.", this);
-            }
-
             // Create the UI
             if (this.playerUiPrefab != null)
             {
-                GameObject _uiGo = Instantiate(this.playerUiPrefab);
-                _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+                GameObject _uiGo = Instantiate(this.playerUiPrefab, transform);
+                _healthBar = _uiGo.GetComponentInChildren<HealthBar>();
+                _healthBar.InitializeSlider(_health);
             }
             else
             {
                 Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
             }
-
-            #if UNITY_5_4_OR_NEWER
-            // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-			UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-            #endif
         }
-
-
-		public override void OnDisable()
-		{
-			// Always call the base to remove callbacks
-			base.OnDisable ();
-
-			#if UNITY_5_4_OR_NEWER
-			UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
-			#endif
-		}
 
 
         /// <summary>
@@ -135,19 +108,14 @@ namespace GGJ2022.Source.Scripts.Game.Players
             {
                 this.ProcessInputs();
 
-                if (this.Health <= 0f)
+                _healthBar.SetHealth(_health);
+
+                if (this._health <= 0f)
                 {
-                    GameManager.Instance.LeaveRoom();
+                    PhotonNetwork.LeaveRoom();
                 }
             }
         }
-
-        /// <summary>
-        /// MonoBehaviour method called when the Collider 'other' enters the trigger.
-        /// Affect Health of the Player if the collider is a beam
-        /// Note: when jumping and firing at the same, you'll find that the player's own beam intersects with itself
-        /// One could move the collider further away to prevent this or check if the beam belongs to the player.
-        /// </summary>
         public void OnTriggerEnter(Collider other)
         {
             if (!photonView.IsMine)
@@ -155,15 +123,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 return;
             }
 
-
-            // We are only interested in Beamers
-            // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
-            {
-                return;
-            }
-
-            this.Health -= 0.1f;
+            this._health -= 0.1f;
         }
 
         /// <summary>
@@ -179,15 +139,8 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 return;
             }
 
-            // We are only interested in Beamers
-            // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
-            {
-                return;
-            }
-
             // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
-            this.Health -= 0.1f*Time.deltaTime;
+            this._health -= 0.1f*Time.deltaTime;
         }
 
 
@@ -268,13 +221,13 @@ namespace GGJ2022.Source.Scripts.Game.Players
             {
                 // We own this player: send the others our data
                 stream.SendNext(this.IsFiring);
-                stream.SendNext(this.Health);
+                stream.SendNext(this._health);
             }
             else
             {
                 // Network player, receive data
                 this.IsFiring = (bool)stream.ReceiveNext();
-                this.Health = (float)stream.ReceiveNext();
+                this._health = (float)stream.ReceiveNext();
             }
         }
 
