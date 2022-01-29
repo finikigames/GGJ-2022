@@ -27,11 +27,12 @@ namespace GGJ2022.Source.Scripts.Controls
         private void AimTrajectory()
         {
             Vector2 firePos = new Vector2(
-                _controlInfo.FireJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f,
-                _controlInfo.FireJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f);
-            if (firePos.normalized.magnitude < 1 && _lineRenderer.enabled)
+                _controlInfo.FireJoystick.Horizontal * 100f,
+                _controlInfo.FireJoystick.Vertical * 100f);
+            if (firePos.normalized.magnitude < 0.5f)
             {
-                _lineRenderer.enabled = false;
+                if (!_lineRenderer.enabled) return;
+                _lineRenderer.enabled = false; 
                 return;
             }
 
@@ -39,7 +40,12 @@ namespace GGJ2022.Source.Scripts.Controls
             {
                 _lineRenderer.enabled = true;
             }
-            _lineRenderer.SetPosition(1, new Vector3(1, 1, 1 ) * firePos);
+
+            var position = transform.position;
+            _lineRenderer.SetPosition(0, position);
+            var linePos = new Vector2(position.x, position.y);
+            linePos += (firePos.normalized * 5);
+            _lineRenderer.SetPosition(1, linePos);
         }
     }
 }

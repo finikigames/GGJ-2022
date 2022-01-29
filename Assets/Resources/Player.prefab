@@ -396,6 +396,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: LineRenderer
       objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.alignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_Parameters.generateLightingData
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7436796082299403253, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
       propertyPath: photonView
       value: 
