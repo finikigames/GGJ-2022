@@ -1,0 +1,111 @@
+
+light_projectile.png
+size: 1270,56
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+vfx_00004
+  rotate: false
+  xy: 953, 4
+  size: 81, 50
+  orig: 100, 60
+  offset: 12, 5
+  index: -1
+vfx_00006
+  rotate: false
+  xy: 1194, 4
+  size: 74, 50
+  orig: 100, 60
+  offset: 19, 5
+  index: -1
+vfx_00008
+  rotate: false
+  xy: 1116, 3
+  size: 76, 51
+  orig: 100, 60
+  offset: 17, 4
+  index: -1
+vfx_00010
+  rotate: false
+  xy: 1036, 3
+  size: 78, 51
+  orig: 100, 60
+  offset: 15, 4
+  index: -1
+vfx_00012
+  rotate: false
+  xy: 871, 3
+  size: 80, 51
+  orig: 100, 60
+  offset: 13, 4
+  index: -1
+vfx_00014
+  rotate: false
+  xy: 528, 2
+  size: 82, 52
+  orig: 100, 60
+  offset: 11, 3
+  index: -1
+vfx_00016
+  rotate: false
+  xy: 443, 2
+  size: 83, 52
+  orig: 100, 60
+  offset: 10, 3
+  index: -1
+vfx_00018
+  rotate: false
+  xy: 180, 2
+  size: 85, 52
+  orig: 100, 60
+  offset: 8, 4
+  index: -1
+vfx_00020
+  rotate: false
+  xy: 267, 3
+  size: 86, 51
+  orig: 100, 60
+  offset: 7, 5
+  index: -1
+vfx_00022
+  rotate: false
+  xy: 91, 3
+  size: 87, 51
+  orig: 100, 60
+  offset: 6, 5
+  index: -1
+vfx_00024
+  rotate: false
+  xy: 2, 2
+  size: 87, 52
+  orig: 100, 60
+  offset: 6, 4
+  index: -1
+vfx_00026
+  rotate: false
+  xy: 355, 3
+  size: 86, 51
+  orig: 100, 60
+  offset: 7, 4
+  index: -1
+vfx_00028
+  rotate: false
+  xy: 612, 4
+  size: 84, 50
+  orig: 100, 60
+  offset: 9, 5
+  index: -1
+vfx_00030
+  rotate: false
+  xy: 698, 4
+  size: 84, 50
+  orig: 100, 60
+  offset: 9, 5
+  index: -1
+vfx_00032
+  rotate: false
+  xy: 784, 5
+  size: 85, 49
+  orig: 100, 60
+  offset: 8, 6
+  index: -1

@@ -1,0 +1,104 @@
+
+light_attack_hit.png
+size: 134,1438
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+vfx1_00008
+  rotate: false
+  xy: 78, 40
+  size: 32, 35
+  orig: 150, 150
+  offset: 59, 53
+  index: -1
+vfx1_00009
+  rotate: false
+  xy: 2, 2
+  size: 74, 73
+  orig: 150, 150
+  offset: 36, 33
+  index: -1
+vfx1_00010
+  rotate: false
+  xy: 2, 135
+  size: 96, 86
+  orig: 150, 150
+  offset: 26, 28
+  index: -1
+vfx1_00011
+  rotate: false
+  xy: 2, 223
+  size: 119, 102
+  orig: 150, 150
+  offset: 16, 20
+  index: -1
+vfx1_00012
+  rotate: false
+  xy: 2, 327
+  size: 124, 107
+  orig: 150, 150
+  offset: 13, 17
+  index: -1
+vfx1_00013
+  rotate: false
+  xy: 2, 436
+  size: 127, 115
+  orig: 150, 150
+  offset: 12, 13
+  index: -1
+vfx1_00014
+  rotate: false
+  xy: 2, 553
+  size: 127, 119
+  orig: 150, 150
+  offset: 12, 11
+  index: -1
+vfx1_00015
+  rotate: false
+  xy: 2, 674
+  size: 129, 122
+  orig: 150, 150
+  offset: 11, 10
+  index: -1
+vfx1_00016
+  rotate: false
+  xy: 2, 798
+  size: 129, 124
+  orig: 150, 150
+  offset: 11, 9
+  index: -1
+vfx1_00017
+  rotate: false
+  xy: 2, 1052
+  size: 130, 126
+  orig: 150, 150
+  offset: 10, 8
+  index: -1
+vfx1_00018
+  rotate: false
+  xy: 2, 924
+  size: 130, 126
+  orig: 150, 150
+  offset: 10, 8
+  index: -1
+vfx1_00019
+  rotate: false
+  xy: 2, 1309
+  size: 130, 127
+  orig: 150, 150
+  offset: 10, 8
+  index: -1
+vfx1_00020
+  rotate: false
+  xy: 2, 1180
+  size: 130, 127
+  orig: 150, 150
+  offset: 10, 8
+  index: -1
+vfx1_00021
+  rotate: true
+  xy: 2, 77
+  size: 56, 123
+  orig: 150, 150
+  offset: 40, 12
+  index: -1
