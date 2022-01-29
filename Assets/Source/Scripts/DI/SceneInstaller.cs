@@ -1,4 +1,5 @@
 ﻿using GGJ2022.Source.Scripts.Controls;
+using GGJ2022.Source.Scripts.Game;
 using GGJ2022.Source.Scripts.Game.StateMachine;
 using GGJ2022.Source.Scripts.Game.StateMachine.States;
 using Photon.Pun.UtilityScripts;
@@ -11,7 +12,7 @@ namespace GGJ2022.Source.Scripts.DI
         public JoystickControlInfo JoystickControlInfo;
         public PhotonTeamsManager TeamsManager;
         public InitState InitState;
-        
+
         public override void InstallBindings()
         {
             StateInstaller.Install(Container);
@@ -26,6 +27,10 @@ namespace GGJ2022.Source.Scripts.DI
             
             Container
                 .BindInstance(InitState)
+                .AsSingle();
+
+            Container
+                .Bind<GameScope>()
                 .AsSingle();
             
             Container
