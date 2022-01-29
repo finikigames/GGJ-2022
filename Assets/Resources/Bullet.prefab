@@ -188,7 +188,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   PhotonView: {fileID: 2395431567723284785}
-  Collider: {fileID: 0}
+  Collider: {fileID: 6636186684260872933}
 --- !u!58 &6636186684260872933
 CircleCollider2D:
   m_ObjectHideFlags: 0
