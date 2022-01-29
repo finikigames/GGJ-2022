@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e08879c05f04169b68202d94812d395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhotonView: {fileID: 450652522538474798}
   Animator: {fileID: 8187418821332012352}
 --- !u!95 &8187418821332012352
 Animator:
