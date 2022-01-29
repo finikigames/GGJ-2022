@@ -58,12 +58,9 @@ namespace GGJ2022.Source.Scripts.Game.Players
         [SerializeField]
         private GameObject playerUiPrefab;
 
-        //True, when the user is firing
-        bool IsFiring;
-
         public void Awake()
         {
-            if (photonView.IsMine)
+            if (PhotonView.IsMine)
             {
                 LocalPlayerInstance = gameObject;
                 _health = _playerConfig.Health;
@@ -98,9 +95,9 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 _health = 100;
             }
             
-            if (!photonView.IsMine)
+            if (!PhotonView.IsMine)
             {
-                photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
+                PhotonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
             }
             
             _healthBar.SetHealth(_health);
@@ -111,17 +108,9 @@ namespace GGJ2022.Source.Scripts.Game.Players
             _health -= damage;
             _healthBar.SetHealth(_health);
             
-            if (!photonView.IsMine)
+            if (!PhotonView.IsMine)
             {
-                photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
-            }
-
-            if (photonView.IsMine)
-            {
-                if (_health <= 0f)
-                {
-                    PhotonNetwork.LeaveRoom();
-                }
+                PhotonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
             }
         }
 
@@ -166,7 +155,10 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         private void Update()
         {
-            
+            if (PhotonView.IsMine && _health <= 0f)
+            {
+                PhotonNetwork.LeaveRoom();
+            }
         }
 
         [PunRPC]
