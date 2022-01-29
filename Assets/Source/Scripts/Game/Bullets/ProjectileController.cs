@@ -119,7 +119,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                     var isBulletState = playerTypeController.Type == BulletState;
                     var isNotBulletState = playerTypeController.Type != BulletState;
                     // This is your ally
-                    if (teamMates.Length > 0 && teamMates[0].UserId == otherPlayer.UserId)
+                    if (teamMates != null && teamMates.Length > 0 && teamMates[0].UserId == otherPlayer.UserId)
                     {
                         // Heal
                         if (isBulletState)
