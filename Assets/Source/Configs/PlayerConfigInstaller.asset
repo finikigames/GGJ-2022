@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerConfig:
     PlayerPrefab: {fileID: 0}
+    MoveSpeed: 5
+    RotatinSpeed: 0

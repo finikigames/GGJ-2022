@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Source.Scripts.Core.Extensions;
 using Unity.Collections;
 
-namespace Source.Scripts.Core
+namespace Source.Scripts.Core.Collections.Native
 {
     public struct ReadOnlyNativeArray2D<T> : IEnumerable<T> where T : struct
     {

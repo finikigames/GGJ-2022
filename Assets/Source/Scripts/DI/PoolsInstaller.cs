@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace DI
+namespace GGJ2022.Source.Scripts.DI
 {
     public class PoolsInstaller : Installer<PoolsInstaller>
     {

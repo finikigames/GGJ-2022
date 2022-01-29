@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Source.Scripts.Core.Utils;
 
-namespace Source.Scripts.Core
+namespace Source.Scripts.Core.Collections
 {
     public class DictionaryEnumNonBoxing<T, T1> where T : Enum
     {

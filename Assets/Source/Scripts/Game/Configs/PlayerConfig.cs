@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game.Configs
+namespace GGJ2022.Source.Scripts.Game.Configs
 {
     [Serializable]
     public class PlayerConfig

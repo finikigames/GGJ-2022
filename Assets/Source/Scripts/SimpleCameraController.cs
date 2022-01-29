@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 using UnityEngine;
 
-namespace UnityTemplateProjects
+namespace GGJ2022.Source.Scripts
 {
     public class SimpleCameraController : MonoBehaviour
     {

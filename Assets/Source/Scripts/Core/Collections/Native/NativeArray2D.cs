@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Source.Scripts.Core.Extensions;
 using Unity.Collections;
 
-namespace Source.Scripts.Core
+namespace Source.Scripts.Core.Collections.Native
 {
     public struct NativeArray2D<T> : IDisposable, IEnumerable<T> where T : struct
     {

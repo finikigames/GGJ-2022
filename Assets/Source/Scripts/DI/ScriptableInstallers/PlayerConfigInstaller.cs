@@ -1,8 +1,8 @@
-using Game.Configs;
+using GGJ2022.Source.Scripts.Game.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace DI.ScriptableInstallers
+namespace GGJ2022.Source.Scripts.DI.ScriptableInstallers
 {
     [CreateAssetMenu(fileName = "PlayerConfigInstaller", menuName = "Installers/PlayerConfigInstaller")]
     public class PlayerConfigInstaller : ScriptableObjectInstaller<PlayerConfigInstaller>

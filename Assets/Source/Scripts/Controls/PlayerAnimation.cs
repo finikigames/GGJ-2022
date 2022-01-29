@@ -1,5 +1,4 @@
-using System;
-using Controls;
+using GGJ2022.Source.Scripts.Controls;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +8,6 @@ namespace Source.Scripts.Controls
     {
         [Inject] private JoystickControlInfo _joysticks;
 
-        public PlayerInputController Controller;
         public Animator Animator;
         //For idleState
         private int _prevAnimation;
@@ -21,7 +19,13 @@ namespace Source.Scripts.Controls
 
         private void FixedUpdate()
         {
-            FillAnimation(Controller.Horizontal, Controller.Vertical, Controller.Movement);
+            var horizontal = _joysticks.MovementJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f;
+            var vertical = _joysticks.MovementJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f;
+            Vector2 newPos = new Vector2(
+                horizontal,
+                vertical);
+            var move = Vector2.ClampMagnitude(newPos, 1);
+            FillAnimation(horizontal, vertical, move);
         }
 
         private void FillAnimation(float horizontal, float vertical, Vector2 move)
