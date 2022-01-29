@@ -58,9 +58,6 @@ namespace GGJ2022.Source.Scripts.Game.Players
         [SerializeField]
         private GameObject playerUiPrefab;
 
-        //True, when the user is firing
-        bool IsFiring;
-
         public void Awake()
         {
             if (PhotonView.IsMine)
