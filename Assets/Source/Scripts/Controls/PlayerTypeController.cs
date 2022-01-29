@@ -3,7 +3,6 @@ using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players.Base;
 using Photon.Pun;
 using UniRx;
-using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
 
@@ -15,9 +14,6 @@ namespace GGJ2022.Source.Scripts.Controls
         public Animator Animator;
         
         public ObjectState Type;
-        public AnimatorController FirstStateView;
-        public AnimatorController SecondStateView;
-
         public SpriteRenderer SpriteRenderer;
 
         private JoystickControlInfo _controlInfo;

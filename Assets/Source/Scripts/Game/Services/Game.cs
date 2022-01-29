@@ -19,7 +19,7 @@ namespace GGJ2022.Source.Scripts.Game.Services
         }
 
         public void Initialize()
-        {  
+        {
             PhotonNetwork.AutomaticallySyncScene = true;
             Application.targetFrameRate = 60;
             

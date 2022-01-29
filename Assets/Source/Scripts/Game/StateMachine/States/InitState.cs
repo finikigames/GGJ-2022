@@ -8,9 +8,9 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
 {
     public class InitState : MonoBehaviourPunCallbacks, IEnter
     {
-        public InitState()
+        public override void OnEnable()
         {
-           PhotonNetwork.AddCallbackTarget(this); 
+            PhotonNetwork.AddCallbackTarget(this); 
         }
 
         public override void OnConnectedToMaster()

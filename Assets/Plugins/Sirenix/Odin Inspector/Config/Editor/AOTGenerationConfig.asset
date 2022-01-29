@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 09000000140000000d000000
-  lastScan: 637790859814847300
+  lastScan: 637791057010049131
   supportSerializedTypes:
   - TypeName: System.Collections.Generic.Dictionary`2[[GGJ2022.Source.Scripts.Game.Players.Base.ObjectState,
       Assembly-CSharp],[GGJ2022.Source.Scripts.Game.Bullets.StateView, Assembly-CSharp]],
@@ -27,14 +27,14 @@ MonoBehaviour:
       Assembly-CSharp]], mscorlib
     IsCustom: 0
     Emit: 1
-  - TypeName: UnityEngine.GameObject, UnityEngine.CoreModule
-    IsCustom: 0
-    Emit: 1
   - TypeName: System.Collections.Generic.IEqualityComparer`1[[GGJ2022.Source.Scripts.Game.Players.Base.ObjectState,
       Assembly-CSharp]], mscorlib
     IsCustom: 0
     Emit: 1
   - TypeName: GGJ2022.Source.Scripts.Game.Players.Base.ObjectState, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: Spine.Unity.SkeletonAnimation, spine-unity
     IsCustom: 0
     Emit: 1
   - TypeName: GGJ2022.Source.Scripts.Game.Bullets.StateView, Assembly-CSharp
