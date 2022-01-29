@@ -1,4 +1,3 @@
-using Source.Scripts.Core.Ticks;
 using Zenject;
 
 namespace GGJ2022.Source.Scripts.DI
@@ -7,14 +6,6 @@ namespace GGJ2022.Source.Scripts.DI
     {
         public override void InstallBindings()
         {
-            
-            Container
-                .Bind<Game.Services.Game>()
-                .AsSingle();
-
-            Container
-                .BindInterfacesTo<UpdateService>()
-                .AsSingle();
         }
     }
 }

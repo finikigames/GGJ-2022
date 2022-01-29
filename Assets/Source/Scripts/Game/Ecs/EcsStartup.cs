@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Source.Scripts.Core.Ticks;
 using Source.Scripts.Core.Ticks.Interfaces;
 using Zenject;
 
@@ -10,7 +11,8 @@ namespace GGJ2022.Source.Scripts.Game.ECS
         public EcsWorld World = new();
         private List<EcsSystems> systems; 
         
-        [Inject] private IUpdateService _updateService;
+        [Inject] 
+        private UpdateService _updateService;
 
         public void RegisterRunner()
         {

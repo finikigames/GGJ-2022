@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameConfigInstaller
   m_EditorClassIdentifier: 
   GameConfig:
-    PlayersToStartGame: 2
+    PlayersToStartGame: 1
     PlayerPrefab: {fileID: 3090748408087131110, guid: e5e73baf21322e741bcb4c76a8263951, type: 3}
