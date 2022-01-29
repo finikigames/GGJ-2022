@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GGJ2022.Source.Scripts.Game;
 using GGJ2022.Source.Scripts.Game.Configs;
 using Photon.Pun;
 using UnityEngine;
@@ -10,15 +11,16 @@ namespace GGJ2022.Source.Scripts.Controls
     {
         private JoystickControlInfo _controlInfo;
         private PlayerConfig _playerConfig;
+        private GameScope _gameScope;
         
         public PhotonView photonView;
         public LineRenderer _lineRenderer;
-        private float _distanceObj;
         public ContactFilter2D ContactFilter2D;
-        
+
         [Inject]
         public void Construct(JoystickControlInfo controlInfo,
-                              PlayerConfig playerConfig)
+                              PlayerConfig playerConfig,
+                              GameScope gameScope)
         {
             _controlInfo = controlInfo;
             _playerConfig = playerConfig;
@@ -71,6 +73,8 @@ namespace GGJ2022.Source.Scripts.Controls
             }
 
             _lineRenderer.SetPosition(1, linePos);
+
+            _controlInfo.ShootDirection = (linePos - (Vector2)heroPosition).normalized;
         }
     }
 }

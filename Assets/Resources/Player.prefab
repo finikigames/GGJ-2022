@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 224231708062103812}
   - component: {fileID: 4898664510049294616}
   - component: {fileID: 6933363067827298135}
+  - component: {fileID: 1884509476165034544}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -341,6 +342,24 @@ MonoBehaviour:
   useLocalTransformOnly: 0
   maxPositionDifferenceForVelocitySyncing: 10
   receivedStatesCounter: 0
+--- !u!114 &1884509476165034544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090748408087131110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ff6ebee47346afbd06dc53c454e04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhotonView: {fileID: 450652522538474798}
+  Animator: {fileID: 0}
+  State: 0
+  FirstStateView: {fileID: 0}
+  SecondStateView: {fileID: 0}
+  SpriteRenderer: {fileID: 3477707323531388303}
 --- !u!1001 &4929828731962848364
 PrefabInstance:
   m_ObjectHideFlags: 0
