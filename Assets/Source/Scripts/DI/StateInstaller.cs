@@ -9,28 +9,12 @@ namespace GGJ2022.Source.Scripts.DI
     {
         public override void InstallBindings()
         {
-            var initState = new InitState();
-            var waitForPlayerState = new WaitForPlayersState();
-            var gameState = new GameState();
+            Container
+                .Bind<WaitForPlayersState>()
+                .AsSingle();
             
-            PhotonNetwork.AddCallbackTarget(initState);
-            PhotonNetwork.AddCallbackTarget(waitForPlayerState);
-            PhotonNetwork.AddCallbackTarget(gameState);
-
             Container
-                .BindInstance(initState)
-                .AsSingle();
-
-            Container
-                .BindInstance(waitForPlayerState)
-                .AsSingle();
-
-            Container
-                .BindInstance(gameState)
-                .AsSingle();
-
-            Container
-                .BindInterfacesAndSelfTo<GameStateMachine>()
+                .Bind<GameState>()
                 .AsSingle();
         }
     }

@@ -1,38 +1,30 @@
 ﻿using System.Collections.Generic;
+using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.StateMachine.States.Base;
+using GGJ2022.Source.Scripts.Global;
+using Photon.Pun;
 using Photon.Realtime;
 
 namespace GGJ2022.Source.Scripts.Game.StateMachine.States
 {
-    public class WaitForPlayersState : IConnectionCallbacks, IEnter, IExit
+    public class WaitForPlayersState : IEnter, IExit
     {
-        public void OnConnected()
-        {
-        }
+        private readonly GameConfig _gameConfig;
 
-        public void OnConnectedToMaster()
+        public WaitForPlayersState(GameConfig gameConfig)
         {
+            _gameConfig = gameConfig;
         }
-
-        public void OnDisconnected(DisconnectCause cause)
-        {
-        }
-
-        public void OnRegionListReceived(RegionHandler regionHandler)
-        {
-        }
-
-        public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
-        {
-        }
-
-        public void OnCustomAuthenticationFailed(string debugMessage)
-        {
-        }
+        
+        private bool CheckForGameReady()
+            => PhotonNetwork.CurrentRoom.PlayerCount == _gameConfig.PlayersToStartGame;
 
         public void OnEntry()
         {
-            
+            if (CheckForGameReady())
+            {
+                PhotonEvents.RaiseEvent(PhotonEvents.StartGame);
+            }
         }
 
         public void OnExit()

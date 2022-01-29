@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9df43331b5b4e2d8b154f914978552f, type: 3}
   m_Name: GameConfigInstaller
   m_EditorClassIdentifier: 
+  GameConfig:
+    PlayersToStartGame: 2
+    PlayerPrefab: {fileID: 3090748408087131110, guid: e5e73baf21322e741bcb4c76a8263951, type: 3}

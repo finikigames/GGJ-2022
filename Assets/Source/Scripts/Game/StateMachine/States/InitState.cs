@@ -1,34 +1,26 @@
 ﻿using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Game.StateMachine.States.Base;
+using GGJ2022.Source.Scripts.Global;
 using Photon.Pun;
 using Photon.Realtime;
 
 namespace GGJ2022.Source.Scripts.Game.StateMachine.States
 {
-    public class InitState : IConnectionCallbacks, IEnter
+    public class InitState : MonoBehaviourPunCallbacks, IEnter
     {
-        public void OnConnected()
+        public InitState()
         {
+           PhotonNetwork.AddCallbackTarget(this); 
         }
 
-        public void OnConnectedToMaster()
+        public override void OnConnectedToMaster()
         {
+            PhotonNetwork.JoinRandomOrCreateRoom();
         }
 
-        public void OnDisconnected(DisconnectCause cause)
+        public override void OnJoinedRoom()
         {
-        }
-
-        public void OnRegionListReceived(RegionHandler regionHandler)
-        {
-        }
-
-        public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
-        {
-        }
-
-        public void OnCustomAuthenticationFailed(string debugMessage)
-        {
+            PhotonEvents.RaiseEvent(PhotonEvents.StartWaiting);
         }
 
         public void OnEntry()
