@@ -114,7 +114,10 @@ namespace GGJ2022.Source.Scripts.Game.Players
             if (!photonView.IsMine)
             {
                 photonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
-                
+            }
+
+            if (photonView.IsMine)
+            {
                 if (_health <= 0f)
                 {
                     PhotonNetwork.LeaveRoom();
