@@ -1,4 +1,5 @@
 ﻿using GGJ2022.Source.Scripts.Controls;
+using GGJ2022.Source.Scripts.Game.ECS;
 using GGJ2022.Source.Scripts.Game.StateMachine;
 using GGJ2022.Source.Scripts.Game.StateMachine.States;
 using Photon.Pun.UtilityScripts;
@@ -16,6 +17,10 @@ namespace GGJ2022.Source.Scripts.DI
         {
             StateInstaller.Install(Container);
 
+            Container
+                .BindInterfacesTo<EcsStartup>()
+                .AsSingle();
+            
             Container
                 .BindInterfacesAndSelfTo<Game.Services.Game>()
                 .AsSingle();
