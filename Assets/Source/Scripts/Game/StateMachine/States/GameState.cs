@@ -68,8 +68,8 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
                     avaliableTeams.Add(team.Code);
                 }
             }
-
-            PhotonNetwork.LocalPlayer.JoinTeam(avaliableTeams[Random.Range(0, 1)]);
+ 
+            PhotonNetwork.LocalPlayer.JoinTeam(avaliableTeams[Random.Range(0, 2)]);
         }
     }
 }
