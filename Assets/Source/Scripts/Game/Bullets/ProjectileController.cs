@@ -107,12 +107,11 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                 };
             }
 
-            
-            _isDead = true;
-            _currentState.Hit.AnimationState.Complete += entry =>
+            if (PhotonView.IsMine && !isPlayerCollision)
             {
-                PhotonNetwork.Destroy(gameObject);
-            };
+                _isDead = true;
+                _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject); };
+            }
         }
 
         private void Update()
@@ -128,7 +127,6 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             if (PhotonView.IsMine && isDistanceExceed)
             {
                 _isDead = true;
-                transform.gameObject.SetActive(false);
                 
                 _currentState.Hit.AnimationState.Complete += _ =>
                 {
