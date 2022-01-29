@@ -22,4 +22,4 @@ MonoBehaviour:
     Damage: 20
     EnemyHeal: 5
     AllyHeal: 10
-    FriendlyFireDamage: 5
+    FriendlyFireDamage: 20
