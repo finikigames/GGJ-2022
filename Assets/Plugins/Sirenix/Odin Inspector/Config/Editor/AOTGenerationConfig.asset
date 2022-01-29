@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 09000000140000000d000000
-  lastScan: 637791057010049131
+  lastScan: 637791111500156642
   supportSerializedTypes:
   - TypeName: System.Collections.Generic.Dictionary`2[[GGJ2022.Source.Scripts.Game.Players.Base.ObjectState,
       Assembly-CSharp],[GGJ2022.Source.Scripts.Game.Bullets.StateView, Assembly-CSharp]],

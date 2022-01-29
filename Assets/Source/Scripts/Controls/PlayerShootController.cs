@@ -60,6 +60,8 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private void Shoot()
         {
+            PhotonView.RPC("PlayShootSound", RpcTarget.All);
+            
             var currentType = PlayerTypeController.Type;
            
             var bullet = PhotonNetwork.Instantiate(_gameConfig.BulletPrefab.name, transform.position, quaternion.identity);

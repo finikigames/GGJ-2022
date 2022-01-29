@@ -16,6 +16,7 @@
     "com.unity.ide.vscode": "1.2.4",
     "com.unity.jobs": "0.11.0-preview.6",
     "com.unity.mathematics": "1.2.5",
+    "com.unity.remote-config": "2.1.2",
     "com.unity.render-pipelines.universal": "12.1.2",
     "com.unity.test-framework": "1.1.29",
     "com.unity.textmeshpro": "3.0.6",
