@@ -160,9 +160,9 @@ namespace GGJ2022.Source.Scripts.Game.Players
         }
 
         [PunRPC]
-        void RPC_GetTeam()
+        void RPC_CurrentHealth()
         {
-            _myTeam = _playerService.NextPlayerTeams;
+            
         }
     }
 }
