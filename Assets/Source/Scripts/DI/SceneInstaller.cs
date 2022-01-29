@@ -19,7 +19,7 @@ namespace GGJ2022.Source.Scripts.DI
         public override void InstallBindings()
         {
             Container
-                .Bind<EcsStartup>()
+                .BindInterfacesAndSelfTo<EcsStartup>()
                 .AsSingle();
 
             Container

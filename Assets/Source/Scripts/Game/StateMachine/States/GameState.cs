@@ -36,8 +36,8 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
         {
             _ecsStartup.RegisterRunner();
             _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, Vector3.zero, Quaternion.identity);
-            
             _cameraResolveService.Resolve();
+            EnterRandomTeam();
         }
 
         public void OnExit()
@@ -53,6 +53,23 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
         public void HideResults()
         {
             
+        }
+
+        private void EnterRandomTeam()
+        {
+            PhotonTeam[] teams = _photonTeamsManager.GetAvailableTeams();
+            var avaliableTeams = new List<byte>();
+            foreach (var team in teams)
+            {
+                _photonTeamsManager.TryGetTeamMembers(team, out var players);
+                var playersInTeam = _gameConfig.PlayersToStartGame / 2;
+                if (players.Length < (playersInTeam > 0 ? playersInTeam : 1))
+                {
+                    avaliableTeams.Add(team.Code);
+                }
+            }
+
+            PhotonNetwork.LocalPlayer.JoinTeam(avaliableTeams[Random.Range(0, 1)]);
         }
     }
 }
