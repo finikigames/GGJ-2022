@@ -19,3 +19,4 @@ MonoBehaviour:
     IsEnemyHeal: 0
     FriendlyFire: 0
     FireStickTreeshold: 0.1
+    isDeathmatch: 1

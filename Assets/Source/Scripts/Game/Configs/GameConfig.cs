@@ -12,5 +12,6 @@ namespace GGJ2022.Source.Scripts.Game.Configs
         public bool IsEnemyHeal;
         public bool FriendlyFire;
         public float FireStickTreeshold;
+        public bool isDeathmatch;
     }
 }

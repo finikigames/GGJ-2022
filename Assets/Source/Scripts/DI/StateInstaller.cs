@@ -1,4 +1,5 @@
-﻿using GGJ2022.Source.Scripts.Game.StateMachine;
+﻿using GGJ2022.Source.Scripts.Game.Services;
+using GGJ2022.Source.Scripts.Game.StateMachine;
 using GGJ2022.Source.Scripts.Game.StateMachine.States;
 using Photon.Pun;
 using Zenject;
@@ -15,6 +16,10 @@ namespace GGJ2022.Source.Scripts.DI
             
             Container
                 .Bind<GameState>()
+                .AsSingle();
+
+            Container
+                .Bind<PlayerService>()
                 .AsSingle();
         }
     }
