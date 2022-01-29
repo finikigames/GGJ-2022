@@ -71,7 +71,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         }
 
         [PunRPC]
-        private void UpdateBulletRotation(Vector2 direction)
+        private void UpdateBulletRotation(Vector3 direction)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
