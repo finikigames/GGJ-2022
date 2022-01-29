@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded95cca4df942aeb830a5697d64973e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhotonView: {fileID: 0}
   _health: 0
   playerUiPrefab: {fileID: 305237399247283524, guid: 3bb3a7941a3e02d4a96097224fc199df, type: 3}
 --- !u!1001 &4929828731962848364

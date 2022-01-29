@@ -21,15 +21,13 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
         private readonly EcsStartup _ecsStartup;
         private readonly PhotonTeamsManager _photonTeamsManager;
         private readonly PlayerService _playerService;
-        private readonly PlayerManager _playerManager;
 
         public GameState(GameConfig gameConfig,
                          GameScope gameScope,
                          ICameraResolveService cameraResolveService,
                          EcsStartup ecsStartup,
                          PhotonTeamsManager photonTeamsManager,
-                         PlayerService playerService,
-                         PlayerManager playerManager)
+                         PlayerService playerService)
         {
             _gameConfig = gameConfig;
             _gameScope = gameScope;
@@ -37,7 +35,6 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
             _ecsStartup = ecsStartup;
             _photonTeamsManager = photonTeamsManager;
             _playerService = playerService;
-            _playerManager = playerManager;
         }
         
         public void OnEntry()
