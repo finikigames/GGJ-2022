@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerConfigInstaller
   m_EditorClassIdentifier: 
   PlayerConfig:
-    PlayerPrefab: {fileID: 0}
     MoveSpeed: 5
     RotatinSpeed: 0
+    FireDistance: 5

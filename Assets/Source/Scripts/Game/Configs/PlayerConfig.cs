@@ -8,5 +8,6 @@ namespace GGJ2022.Source.Scripts.Game.Configs
     {
         public float MoveSpeed;
         public float RotatinSpeed;
+        public float FireDistance;
     }
 }
