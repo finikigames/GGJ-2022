@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletConfigInstaller
   m_EditorClassIdentifier: 
   BulletConfig:
-    BulletSpeed: 5
+    BulletSpeed: 15
     DestroyBulletLayers:
       serializedVersion: 2
       m_Bits: 0
