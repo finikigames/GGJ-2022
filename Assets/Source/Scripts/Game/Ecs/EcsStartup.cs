@@ -1,18 +1,35 @@
-using System.Collections.Generic;
+using GGJ2022.Source.Scripts.Game.ECS.Base;
 using Leopotam.EcsLite;
 using Source.Scripts.Core.Ticks;
 using Source.Scripts.Core.Ticks.Interfaces;
-using Zenject;
 
 namespace GGJ2022.Source.Scripts.Game.ECS
 {
-    public class EcsStartup : IUpdatable
+    public class EcsStartup : IUpdatable, IEcsStartup
     {
-        public EcsWorld World = new();
-        private List<EcsSystems> systems; 
-        
-        [Inject] 
         private UpdateService _updateService;
+
+        private EcsWorld _world;
+        private EcsSystems _systems;
+        private readonly GameScope _gameScope;
+
+        public EcsStartup(UpdateService updateService,
+                          GameScope gameScope)
+        {
+            _updateService = updateService;
+            _gameScope = gameScope;
+        }
+
+        public void Initialize()
+        {
+            _world = new EcsWorld();
+            _gameScope.World = _world;
+        }
+
+        public void CustomUpdate()
+        {
+            _systems.Run();
+        }
 
         public void RegisterRunner()
         {
@@ -24,9 +41,10 @@ namespace GGJ2022.Source.Scripts.Game.ECS
             _updateService.UnregisterUpdate(this);
         }
 
-        public void CustomUpdate()
+        public void Dispose()
         {
-            
+            _systems.Destroy();
+            _world.Destroy();
         }
     }
 }
