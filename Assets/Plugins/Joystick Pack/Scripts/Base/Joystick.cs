@@ -45,7 +45,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     protected virtual void Start()
     {
-        IsPointerUp = new ReactiveProperty<bool>();
+        IsPointerUp = new ReactiveProperty<bool>(false);
         HandleRange = handleRange;
         DeadZone = deadZone;
         baseRect = GetComponent<RectTransform>();
@@ -64,6 +64,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
+        IsPointerUp.Value = false;
     }
 
     public void OnDrag(PointerEventData eventData)

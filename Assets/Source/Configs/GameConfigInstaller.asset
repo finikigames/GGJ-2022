@@ -18,3 +18,4 @@ MonoBehaviour:
     BulletPrefab: {fileID: 2873354166301828177, guid: bb402a431dfe30448b1f69ae653fdb87, type: 3}
     IsEnemyHeal: 0
     FriendlyFire: 0
+    FireStickTreeshold: 0.1

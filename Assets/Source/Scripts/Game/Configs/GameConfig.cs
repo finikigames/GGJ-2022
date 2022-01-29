@@ -11,5 +11,6 @@ namespace GGJ2022.Source.Scripts.Game.Configs
         public GameObject BulletPrefab;
         public bool IsEnemyHeal;
         public bool FriendlyFire;
+        public float FireStickTreeshold;
     }
 }

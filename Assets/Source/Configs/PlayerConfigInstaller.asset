@@ -14,5 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerConfig:
     MoveSpeed: 5
-    RotatinSpeed: 0
+    RotationSpeed: 0
     FireDistance: 5
+    ShootDelay: 1
+    StateSwitchDelay: 2
+    Health: 100
+    Damage: 20
+    EnemyHeal: 5
+    AllyHeal: 10
+    FriendlyFireDamage: 5

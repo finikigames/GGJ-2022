@@ -2,6 +2,7 @@
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players.Base;
 using Photon.Pun;
+using UniRx;
 using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
@@ -21,7 +22,11 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private JoystickControlInfo _controlInfo;
         private PlayerConfig _playerConfig;
-
+        
+        private IDisposable _timer;
+        private bool _ready = true;
+        
+        
         [Inject]
         public void Construct(JoystickControlInfo controlInfo,
                               PlayerConfig playerConfig)
@@ -30,6 +35,14 @@ namespace GGJ2022.Source.Scripts.Controls
             _playerConfig = playerConfig;
         }
 
+        private void StartTimer()
+        {
+            _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.StateSwitchDelay)).Subscribe(_ =>
+            {
+                _ready = true;
+            });
+        }
+        
         private void Start()
         {
             if (PhotonView.IsMine)
@@ -40,8 +53,14 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private void ChangeType()
         {
-            InvertState();
-            PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, State);
+            if (_ready)
+            {
+                InvertState();
+                PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, State);
+
+                StartTimer();
+                _ready = false;
+            }
         }
 
         [PunRPC]
