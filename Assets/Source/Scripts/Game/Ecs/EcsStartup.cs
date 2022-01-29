@@ -1,7 +1,9 @@
 using GGJ2022.Source.Scripts.Game.ECS.Base;
+using GGJ2022.Source.Scripts.Game.ECS.Systems;
 using Leopotam.EcsLite;
 using Source.Scripts.Core.Ticks;
 using Source.Scripts.Core.Ticks.Interfaces;
+using Voody.UniLeo.Lite;
 
 namespace GGJ2022.Source.Scripts.Game.ECS
 {
@@ -23,6 +25,11 @@ namespace GGJ2022.Source.Scripts.Game.ECS
         public void Initialize()
         {
             _world = new EcsWorld();
+            _systems = new EcsSystems(_world);
+            _systems
+                .ConvertScene()
+                .Add(new BulletCreateSystem())
+                .Add(new BulletMovementSystem());
             _gameScope.World = _world;
         }
 

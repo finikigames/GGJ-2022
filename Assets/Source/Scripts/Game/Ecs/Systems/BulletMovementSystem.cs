@@ -15,7 +15,10 @@ namespace GGJ2022.Source.Scripts.Game.ECS.Systems
 
         public void Run(EcsSystems systems)
         {
-            
+            foreach (var entity in _filterExt.Filter())
+            {
+                
+            }
         }
     }
 }
