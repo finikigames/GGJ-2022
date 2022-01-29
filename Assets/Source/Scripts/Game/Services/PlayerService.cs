@@ -40,7 +40,7 @@ namespace GGJ2022.Source.Scripts.Game.Services
                 }
             }
  
-            PhotonNetwork.LocalPlayer.JoinTeam(avaliableTeams[Random.Range(0, 2)]);
+            //PhotonNetwork.LocalPlayer.JoinTeam(avaliableTeams[Random.Range(0, 2)]);
             if (_gameConfig.isDeathmatch)
             {
                 SpawnDeathmatch();
@@ -70,24 +70,19 @@ namespace GGJ2022.Source.Scripts.Game.Services
 
         private void SpawnPlayer()
         {
-            var playerTeam = FindTeamCode();
+            //var playerTeam = FindTeamCode();
             var id = PhotonNetwork.LocalPlayer.ActorNumber;
-            if (id > 2)
+            if (id < 3) 
             {
-                id /= 2 - 1;
-            }
-            else
-            {
-                id /= 2;
-            }
-            if (playerTeam == 1) 
-            {
-                _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, _teamSpawnPoints.BlueTeam[id].position, Quaternion.identity);
+                _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, _teamSpawnPoints.BlueTeam[id-1].position, Quaternion.identity);
+                PhotonNetwork.LocalPlayer.JoinTeam(1);
                 return;
             }
-            if (playerTeam == 2)
+            if (id > 2)
             {
-                _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, _teamSpawnPoints.RedTeam[id].position, Quaternion.identity);
+                id /= 2;
+                _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, _teamSpawnPoints.RedTeam[id-1].position, Quaternion.identity);
+                PhotonNetwork.LocalPlayer.JoinTeam(2);
                 return;
             }
             _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name, Vector3.zero, Quaternion.identity);
