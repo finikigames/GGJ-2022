@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Source.Scripts.Core.Collections.Native;
 using Unity.Collections;
 
 namespace Source.Scripts.Core.Extensions

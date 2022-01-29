@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Source.Scripts.Core.Base;
+using Source.Scripts.Core.Collections.Native.Base;
 using Unity.Collections;
 
-namespace Source.Scripts.Core
+namespace Source.Scripts.Core.Collections.Native
 {
     public struct FixedList128Bytes2D<T> : IEnumerable<T> where T : unmanaged
     {

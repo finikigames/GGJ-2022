@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Controls
+namespace GGJ2022.Source.Scripts.Controls
 {
     public class JoystickControlInfo : MonoBehaviour
     {

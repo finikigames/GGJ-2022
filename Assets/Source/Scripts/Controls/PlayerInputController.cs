@@ -1,27 +1,40 @@
+using GGJ2022.Source.Scripts.Game.Configs;
+using Photon.Pun;
 using UnityEngine;
 using Zenject;
 
-namespace Controls
+namespace GGJ2022.Source.Scripts.Controls
 {
     public class PlayerInputController : MonoBehaviour
     {
-        [Inject] private JoystickControlInfo _joysticks;
-        public Rigidbody2D Rigidbody;
-        //Temporary
-        public float _moveSpeed = 25f;
+        private JoystickControlInfo _controlInfo;
+        private PlayerConfig _playerConfig;
         
-        // Start is called before the first frame update
-        void Start()
+        [Inject]
+        public void Construct(JoystickControlInfo controlInfo,
+                              PlayerConfig playerConfig)
         {
-        
+            _controlInfo = controlInfo;
+            _playerConfig = playerConfig;
         }
-        
+
+        public Rigidbody2D Rigidbody;
+        public PhotonView photonView;
+
         void FixedUpdate()
         {
+            if (photonView.IsMine)
+            {
+                Move();
+            }
+        }
+
+        private void Move()
+        {
             Vector2 newPos = new Vector2(
-                _joysticks.MovementJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f,
-                _joysticks.MovementJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f);
-            var move = Vector2.ClampMagnitude(newPos, 1) * _moveSpeed * Time.fixedDeltaTime + Rigidbody.position;
+                _controlInfo.MovementJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f,
+                _controlInfo.MovementJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f);
+            var move = Vector2.ClampMagnitude(newPos, 1) * _playerConfig.MoveSpeed * Time.fixedDeltaTime + Rigidbody.position;
             Rigidbody.MovePosition(move);
         }
     }

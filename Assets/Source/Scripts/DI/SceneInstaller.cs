@@ -1,9 +1,8 @@
-﻿using Controls;
+﻿using GGJ2022.Source.Scripts.Controls;
 using Photon.Pun.UtilityScripts;
-using UnityEngine.Serialization;
 using Zenject;
 
-namespace DI
+namespace GGJ2022.Source.Scripts.DI
 {
     public class SceneInstaller : MonoInstaller
     {
