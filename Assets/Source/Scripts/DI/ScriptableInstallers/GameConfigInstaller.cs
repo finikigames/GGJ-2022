@@ -2,7 +2,7 @@ using Game.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace DI
+namespace DI.ScriptableInstallers
 {
     [CreateAssetMenu(fileName = "GameConfigInstaller", menuName = "Installers/GameConfigInstaller")]
     public class GameConfigInstaller : ScriptableObjectInstaller<GameConfigInstaller>
@@ -11,7 +11,9 @@ namespace DI
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<GameConfig>().FromInstance(GameConfig).AsSingle();
+            Container
+                .BindInstance(GameConfig)
+                .AsSingle();
         }
     }
 }
