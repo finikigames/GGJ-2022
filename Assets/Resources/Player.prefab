@@ -361,8 +361,6 @@ MonoBehaviour:
   PhotonView: {fileID: 450652522538474798}
   Animator: {fileID: 0}
   Type: 0
-  FirstStateView: {fileID: 0}
-  SecondStateView: {fileID: 0}
   SpriteRenderer: {fileID: 3477707323531388303}
 --- !u!114 &6671124565395481592
 MonoBehaviour:
