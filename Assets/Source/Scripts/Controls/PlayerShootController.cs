@@ -18,16 +18,21 @@ namespace GGJ2022.Source.Scripts.Controls
 
         public PhotonView PhotonView;
         public PlayerTypeController PlayerTypeController;
-        
-        
+        private IDisposable _timer;
+        private bool _ready = true;
+        private PlayerConfig _playerConfig;
+
+
         [Inject]
         public void Construct(BulletConfig bulletConfig,
                               JoystickControlInfo controlInfo,
-                              GameConfig gameConfig)
+                              GameConfig gameConfig,
+                              PlayerConfig playerConfig)
         {
             _bulletConfig = bulletConfig;
             _controlInfo = controlInfo;
             _gameConfig = gameConfig;
+            _playerConfig = playerConfig;
         }
 
         private void Awake()
@@ -35,10 +40,23 @@ namespace GGJ2022.Source.Scripts.Controls
             if (PhotonView.IsMine)
             {
                 _controlInfo.FireJoystick.IsPointerUp
-                    .Where(x => x && _controlInfo.ShootDirection.magnitude > _gameConfig.FireStickTreeshold).Subscribe(
-                        _ => { Shoot(); });
+                    .Where(x => x && _controlInfo.ShootDirection.magnitude > _gameConfig.FireStickTreeshold && _ready).Subscribe(
+                        _ =>
+                        {
+                            Shoot();
+                            _ready = false;
+                        });
             }
         }
+        
+        private void StartTimer()
+        {
+            _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.ShootDelay)).Subscribe(_ =>
+            {
+                _ready = true;
+            });
+        }
+
 
         private void Shoot()
         {
