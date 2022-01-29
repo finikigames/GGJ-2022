@@ -36,10 +36,7 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private void AimTrajectory()
         {
-            Vector2 firePos = new Vector2(
-                _controlInfo.FireJoystick.Horizontal * 100f,
-                _controlInfo.FireJoystick.Vertical * 100f);
-            if (firePos.normalized.magnitude < 0.5f)
+            if (_controlInfo.FireJoystick.Direction.magnitude < 0.5f)
             {
                 if (!_lineRenderer.enabled) return;
                 _lineRenderer.enabled = false; 
@@ -55,9 +52,9 @@ namespace GGJ2022.Source.Scripts.Controls
             
             _lineRenderer.SetPosition(0, heroPosition);
             var linePos = new Vector2(heroPosition.x, heroPosition.y);
-            linePos += (firePos.normalized * _playerConfig.FireDistance);
+            linePos += _controlInfo.FireJoystick.Direction * _playerConfig.FireDistance;
             List<RaycastHit2D> results = new List<RaycastHit2D>(1);
-            var hitsCount = Physics2D.Raycast(heroPosition, linePos, ContactFilter2D, results);
+            var hitsCount = Physics2D.Raycast(heroPosition, _controlInfo.FireJoystick.Direction, ContactFilter2D, results);
             
             if (hitsCount > 0)
             {
@@ -68,7 +65,7 @@ namespace GGJ2022.Source.Scripts.Controls
                     //linePos = hit.point;
 
                     linePos = new Vector2(heroPosition.x, heroPosition.y);
-                    linePos += (firePos.normalized * hit.distance);
+                    linePos += (_controlInfo.FireJoystick.Direction * hit.distance);
                 }
             }
 

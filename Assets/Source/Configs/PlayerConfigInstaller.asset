@@ -15,7 +15,7 @@ MonoBehaviour:
   PlayerConfig:
     MoveSpeed: 5
     RotationSpeed: 0
-    FireDistance: 5
+    FireDistance: 10
     ShootDelay: 1
     StateSwitchDelay: 2
     Health: 100
