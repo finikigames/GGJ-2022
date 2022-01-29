@@ -2,6 +2,7 @@
 using GGJ2022.Source.Scripts.Game.ECS;
 using GGJ2022.Source.Scripts.Game;
 using GGJ2022.Source.Scripts.Game.Players;
+using GGJ2022.Source.Scripts.Game.Services;
 using GGJ2022.Source.Scripts.Game.StateMachine;
 using GGJ2022.Source.Scripts.Game.StateMachine.States;
 using Photon.Pun.UtilityScripts;
@@ -19,6 +20,7 @@ namespace GGJ2022.Source.Scripts.DI
         public InitState InitState;
         public UpdateService UpdateService;
         public TeamSpawnPoints TeamSpawnPoints;
+        public PlayerService PlayerService;
 
         public override void InstallBindings()
         {
@@ -60,6 +62,10 @@ namespace GGJ2022.Source.Scripts.DI
             
             Container
                 .BindInstance(TeamSpawnPoints)
+                .AsSingle();
+            
+            Container
+                .BindInstance(PlayerService)
                 .AsSingle();
             
             StateInstaller.Install(Container);

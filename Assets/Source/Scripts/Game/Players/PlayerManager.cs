@@ -30,18 +30,13 @@ namespace GGJ2022.Source.Scripts.Game.Players
     {
         #region Public Fields
 
-        public PhotonView PhotonView;
         private PlayerConfig _playerConfig;
-        private PlayerService _playerService;
         private HealthBar _healthBar;
-        private int _myTeam;
 
         [Inject]
-        public void Construct(PlayerConfig playerConfig,
-                              PlayerService playerService)
+        public void Construct(PlayerConfig playerConfig)
         {
             _playerConfig = playerConfig;
-            _playerService = playerService;
         }
 
         [Tooltip("The current Health of our player")]

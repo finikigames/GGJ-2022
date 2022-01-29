@@ -17,10 +17,6 @@ namespace GGJ2022.Source.Scripts.DI
             Container
                 .Bind<GameState>()
                 .AsSingle();
-
-            Container
-                .Bind<PlayerService>()
-                .AsSingle();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine.States
         public void OnEntry()
         {
             _ecsStartup.RegisterRunner();
-            _playerService.EnterRandomTeam();
+            _playerService.Spawn();
             _cameraResolveService.Resolve();
         }
 

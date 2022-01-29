@@ -1,21 +1,28 @@
+using System;
 using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using UnityEngine;
+using Zenject;
+using Random = UnityEngine.Random;
 
 namespace GGJ2022.Source.Scripts.Game.Services
 {
-    public class PlayerService
+    public class PlayerService : MonoBehaviour
     {
-        private readonly GameConfig _gameConfig;
-        private readonly GameScope _gameScope;
-        private readonly PhotonTeamsManager _photonTeamsManager;
-        private readonly TeamSpawnPoints _teamSpawnPoints;
-        public int NextPlayerTeams;
+        private GameConfig _gameConfig;
+        private GameScope _gameScope;
+        private PhotonTeamsManager _photonTeamsManager;
+        private TeamSpawnPoints _teamSpawnPoints;
 
-        public PlayerService(GameConfig gameConfig,
+        public PhotonView PhotonView;
+        public int NextPlayerTeams;
+        private int _myTeam = 1;
+
+        [Inject]
+        public void Construct(GameConfig gameConfig,
                                  GameScope gameScope,
                                  PhotonTeamsManager photonTeamsManager,
                                  TeamSpawnPoints teamSpawnPoints)
@@ -109,6 +116,56 @@ namespace GGJ2022.Source.Scripts.Game.Services
             {
                 NextPlayerTeams = 1;
             }
+        }
+
+        private void Start()
+        {
+            if (PhotonView.IsMine)
+            {
+                PhotonView.RPC("RPC_GetTeam", RpcTarget.MasterClient);
+            }
+        }
+
+        public void Spawn()
+        {
+            if (_gameScope.LocalPlayer == null && _myTeam != 0)
+            {
+                if (_myTeam == 1)
+                {
+                    int team = Random.Range(0, _teamSpawnPoints.BlueTeam.Count);
+                    if (PhotonView.IsMine)
+                    {
+                        _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name,
+                            _teamSpawnPoints.BlueTeam[team].position, Quaternion.identity, 0);
+                        PhotonNetwork.LocalPlayer.JoinTeam(1);
+                    }
+                }
+
+                if (_myTeam == 2)
+                {
+                    int team = Random.Range(0, _teamSpawnPoints.RedTeam.Count);
+                    if (PhotonView.IsMine)
+                    {
+                        _gameScope.LocalPlayer = PhotonNetwork.Instantiate(_gameConfig.PlayerPrefab.name,
+                            _teamSpawnPoints.RedTeam[team].position, Quaternion.identity, 0);
+                        PhotonNetwork.LocalPlayer.JoinTeam(2);
+                    } 
+                }
+            }
+        }
+
+        [PunRPC]
+        void RPC_GetTeam()
+        {
+            _myTeam = NextPlayerTeams;
+            UpdateTeam();
+            PhotonView.RPC("RPC_SentTeam", RpcTarget.OthersBuffered, _myTeam);
+        }
+
+        [PunRPC]
+        void RPC_SentTeam(int whichTeam)
+        {
+            _myTeam = whichTeam;
         }
     }
 }
