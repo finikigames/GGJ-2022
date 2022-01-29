@@ -43,10 +43,11 @@ namespace GGJ2022.Source.Scripts.Controls
             });
         }
         
-        private void Start()
+        private void Awake()
         {
             if (PhotonView.IsMine)
             {
+                _controlInfo.ChangeTypeButton.onClick.RemoveAllListeners();
                 _controlInfo.ChangeTypeButton.onClick.AddListener(ChangeType);
             }
         }
