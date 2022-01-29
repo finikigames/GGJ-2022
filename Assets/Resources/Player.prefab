@@ -470,6 +470,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050901914482772814, guid: 54a3ad48dc8ce6f4e8d9c462118f51a2, type: 3}
       propertyPath: m_Parameters.alignment
       value: 0
       objectReference: {fileID: 0}
