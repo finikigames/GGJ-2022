@@ -2,6 +2,9 @@
   "dependencies": {
     "com.leopotam.ecslite": "https://github.com/odingamesdev/ecslite.git",
     "com.odingames.native-ecslite": "https://github.com/odingamesdev/native-ecslite.git",
+    "com.unity.2d.animation": "7.0.3",
+    "com.unity.2d.tilemap": "1.0.0",
+    "com.unity.2d.tilemap.extras": "2.2.1",
     "com.unity.addressables": "1.19.17",
     "com.unity.burst": "1.6.4",
     "com.unity.cinemachine": "2.8.4",
