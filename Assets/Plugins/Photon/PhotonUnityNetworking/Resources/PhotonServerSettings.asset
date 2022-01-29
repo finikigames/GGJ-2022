@@ -48,6 +48,7 @@ MonoBehaviour:
   - SetHeal
   - DeleteBullet
   - RPC_GetTeam
+  - ShowDeathAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

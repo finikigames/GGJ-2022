@@ -146,15 +146,11 @@ namespace GGJ2022.Source.Scripts.Game.Players
         {
             if (stream.IsWriting)
             {
-                // We own this player: send the others our data
-                stream.SendNext(this.IsFiring);
-                stream.SendNext(this._health);
+                stream.SendNext(_health);
             }
             else
             {
-                // Network player, receive data
-                this.IsFiring = (bool)stream.ReceiveNext();
-                this._health = (float)stream.ReceiveNext();
+                _health = (float)stream.ReceiveNext();
             }
         }
 

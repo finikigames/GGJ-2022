@@ -20,7 +20,8 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         public PhotonView PhotonView;
 
         public Collider2D Collider;
-
+        public Rigidbody2D Rigidbody2D;
+        
         private Vector3 _direciton;
         private Vector3 _startPosition;
         private BulletConfig _bulletConfig;
@@ -52,17 +53,18 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         {
             if (!PhotonView.IsMine)
             {
-                Collider.enabled = false;
+                Destroy(Rigidbody2D);
+                Destroy(Collider);
             }
+            _currentState ??= _currentState = StateViews[BulletState];
+            _currentState.Attack.gameObject.SetActive(true);
+            float angle = Mathf.Atan2(_direciton.y, _direciton.x) * Mathf.Rad2Deg;
+            _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         public void Initialize(ObjectState initialState)
         {
             BulletState = initialState;
-            _currentState ??= _currentState = StateViews[BulletState];
-            _currentState.Attack.gameObject.SetActive(true);
-            float angle = Mathf.Atan2(_direciton.y, _direciton.x) * Mathf.Rad2Deg;
-            _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -108,8 +110,16 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             if (PhotonView.IsMine)
             {
                 _isDead = true;
+                PhotonView.RPC("ShowDeathAnimation", RpcTarget.Others);
                 _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject);};
             }
+        }
+
+        [PunRPC]
+        private void ShowDeathAnimation()
+        {
+            _currentState.Attack.gameObject.SetActive(false);
+            _currentState.Hit.gameObject.SetActive(true);
         }
         
         private void Update()
