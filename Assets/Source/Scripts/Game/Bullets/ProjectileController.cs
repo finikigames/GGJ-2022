@@ -52,21 +52,30 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
         private void Start()
         {
-            int multiplier = 1;
             if (!PhotonView.IsMine)
             {
                 Destroy(Rigidbody2D);
                 Destroy(Collider);
-                multiplier *= -1;
+            }
+
+            if (PhotonView.IsMine)
+            {
+                UpdateBulletRotation(_direciton);
+                PhotonView.RPC("UpdateBulletRotation", RpcTarget.Others, _direciton);
             }
             _currentState ??= _currentState = StateViews[BulletState];
             _currentState.Attack.gameObject.SetActive(true);
-            float angle = multiplier * Mathf.Atan2(_direciton.y, _direciton.x) * Mathf.Rad2Deg;
-            _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+            
             _enableCollision = true;
         }
 
+        [PunRPC]
+        private void UpdateBulletRotation(Vector2 direction)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            _currentState.Attack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        
         public void Initialize(ObjectState initialState)
         {
             BulletState = initialState;
@@ -145,6 +154,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             {
                 _isDead = true;
                 
+                PhotonView.RPC("ShowDeathAnimation", RpcTarget.Others);
                 _currentState.Hit.AnimationState.Complete += _ =>
                 {
                     PhotonNetwork.Destroy(gameObject);
