@@ -1,0 +1,104 @@
+
+smoke_swap.png
+size: 145,1546
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+vfx2_00000
+  rotate: false
+  xy: 105, 72
+  size: 30, 29
+  orig: 150, 150
+  offset: 55, 58
+  index: -1
+vfx2_00002
+  rotate: true
+  xy: 2, 2
+  size: 99, 101
+  orig: 150, 150
+  offset: 28, 26
+  index: -1
+vfx2_00004
+  rotate: true
+  xy: 2, 103
+  size: 112, 114
+  orig: 150, 150
+  offset: 21, 21
+  index: -1
+vfx2_00006
+  rotate: true
+  xy: 2, 217
+  size: 116, 119
+  orig: 150, 150
+  offset: 19, 18
+  index: -1
+vfx2_00008
+  rotate: true
+  xy: 2, 335
+  size: 119, 121
+  orig: 150, 150
+  offset: 17, 17
+  index: -1
+vfx2_00010
+  rotate: true
+  xy: 2, 456
+  size: 123, 127
+  orig: 150, 150
+  offset: 15, 14
+  index: -1
+vfx2_00012
+  rotate: true
+  xy: 2, 581
+  size: 130, 131
+  orig: 150, 150
+  offset: 12, 11
+  index: -1
+vfx2_00014
+  rotate: false
+  xy: 2, 849
+  size: 136, 134
+  orig: 150, 150
+  offset: 9, 10
+  index: -1
+vfx2_00016
+  rotate: false
+  xy: 2, 713
+  size: 136, 134
+  orig: 150, 150
+  offset: 9, 10
+  index: -1
+vfx2_00018
+  rotate: false
+  xy: 2, 985
+  size: 138, 136
+  orig: 150, 150
+  offset: 8, 9
+  index: -1
+vfx2_00020
+  rotate: false
+  xy: 2, 1123
+  size: 139, 138
+  orig: 150, 150
+  offset: 7, 8
+  index: -1
+vfx2_00022
+  rotate: false
+  xy: 2, 1263
+  size: 141, 139
+  orig: 150, 150
+  offset: 6, 7
+  index: -1
+vfx2_00025
+  rotate: false
+  xy: 2, 1404
+  size: 140, 140
+  orig: 150, 150
+  offset: 6, 7
+  index: -1
+vfx2_00024
+  rotate: false
+  xy: 2, 1404
+  size: 140, 140
+  orig: 150, 150
+  offset: 6, 7
+  index: -1

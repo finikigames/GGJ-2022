@@ -2,6 +2,7 @@
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players.Base;
 using Photon.Pun;
+using Spine.Unity;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,7 @@ namespace GGJ2022.Source.Scripts.Controls
     {
         public PhotonView PhotonView;
         public Animator Animator;
+        public SkeletonAnimation SwitchState;
         
         public ObjectState Type;
         public SpriteRenderer SpriteRenderer;
@@ -21,7 +23,6 @@ namespace GGJ2022.Source.Scripts.Controls
         
         private IDisposable _timer;
         private bool _ready = true;
-        
         
         [Inject]
         public void Construct(JoystickControlInfo controlInfo,
@@ -36,6 +37,7 @@ namespace GGJ2022.Source.Scripts.Controls
             _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.StateSwitchDelay)).Subscribe(_ =>
             {
                 _ready = true;
+                _timer.Dispose();
             });
         }
         
@@ -54,7 +56,7 @@ namespace GGJ2022.Source.Scripts.Controls
             {
                 InvertState();
                 PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, Type);
-
+                
                 StartTimer();
                 _ready = false;
             }
@@ -64,6 +66,11 @@ namespace GGJ2022.Source.Scripts.Controls
         private void ChangeTypeRemote(ObjectState state)
         {
             Type = state;
+            SwitchState.gameObject.SetActive(true);
+            SwitchState.state.Complete += entry =>
+            {
+                SwitchState.gameObject.SetActive(false);
+            };
             SpriteRenderer.color = Type == ObjectState.First ? Color.white : Color.red;
         }
         
