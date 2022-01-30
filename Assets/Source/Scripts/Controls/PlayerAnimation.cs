@@ -1,5 +1,8 @@
+using System;
 using GGJ2022.Source.Scripts.Controls;
+using GGJ2022.Source.Scripts.Game.Configs;
 using Photon.Pun;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -9,9 +12,15 @@ namespace Source.Scripts.Controls
     {
         [Inject]
         private JoystickControlInfo _joysticks;
+        [Inject]
+        private GameConfig _gameConfig;
+        [Inject]
+        private PlayerConfig _playerConfig;
+
+        private bool _ready = true;
+        private IDisposable _timer;
 
         public PhotonView PhotonView;
-
         public Animator Animator;
 
         //For idleState
@@ -21,6 +30,22 @@ namespace Source.Scripts.Controls
         private static readonly int Vertical = Animator.StringToHash("Vertical");
         private static readonly int PrevHorizontal = Animator.StringToHash("PrevHorizontal");
         private static readonly int PrevVertical = Animator.StringToHash("PrevVertical");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+
+        private void Awake()
+        {
+            if (PhotonView.IsMine)
+            {
+                _joysticks.FireJoystick.IsPointerUp
+                    .Where(x => x && _joysticks.ShootDirection.magnitude > _gameConfig.FireStickTreeshold && _ready).Subscribe(
+                        _ =>
+                        {
+                            AttackAnimation();
+                            _ready = false;
+                            StartTimer();
+                        });
+            }
+        }
 
         private void FixedUpdate()
         {
@@ -54,6 +79,19 @@ namespace Source.Scripts.Controls
                 Animator.SetFloat(PrevHorizontal, horizontal);
                 Animator.SetFloat(PrevVertical, vertical);
             }
+        }
+
+        private void StartTimer()
+        {
+            _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.ShootDelay)).Subscribe(_ =>
+            {
+                _ready = true;
+            });
+        }
+
+        private void AttackAnimation()
+        {
+            Animator.SetTrigger(Attack);
         }
     }
 }
