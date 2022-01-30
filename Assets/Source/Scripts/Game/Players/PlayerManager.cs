@@ -16,6 +16,7 @@ using GGJ2022.Source.Scripts.UI.Player;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using Photon.Pun.UtilityScripts;
+using Spine.Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -35,6 +36,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         public PhotonView PhotonView;
         public SpriteRenderer TeamCircle;
+        public SkeletonAnimation Death;
         private PlayerConfig _playerConfig;
         private PlayerService _playerService;
         private GameConfig _gameConfig;
@@ -205,7 +207,11 @@ namespace GGJ2022.Source.Scripts.Game.Players
         {
             if (PhotonView.IsMine && !_isLeft && _health <= 0f)
             {
-                PhotonNetwork.LeaveRoom();
+                Death.gameObject.SetActive(true);
+                Death.state.Complete += entry =>
+                {
+                    PhotonNetwork.LeaveRoom();
+                };
             }
         }
 
