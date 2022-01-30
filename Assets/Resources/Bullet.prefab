@@ -191,6 +191,7 @@ MonoBehaviour:
   PhotonView: {fileID: 2395431567723284785}
   Collider: {fileID: 6636186684260872933}
   Rigidbody2D: {fileID: 5714782699065704151}
+  SpotLight: {fileID: 699144075286409456}
 --- !u!58 &6636186684260872933
 CircleCollider2D:
   m_ObjectHideFlags: 0
