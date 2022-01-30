@@ -9,6 +9,7 @@ using Photon.Pun.UtilityScripts;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using Zenject;
 
 namespace GGJ2022.Source.Scripts.Game.Bullets
@@ -21,6 +22,8 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
         public Collider2D Collider;
         public Rigidbody2D Rigidbody2D;
+
+        public Light2D SpotLight;
         
         private Vector3 _direciton;
         private Vector3 _startPosition;
@@ -65,9 +68,9 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
            
             _currentState ??= _currentState = StateViews[BulletState];
             _currentState.Attack.gameObject.SetActive(true);
-            UpdateBulletRotation(_direciton);
             PhotonView.RPC("UpdateBulletType", RpcTarget.Others, initialState);
-            PhotonView.RPC("UpdateBulletRotation", RpcTarget.Others, _direciton);
+            PhotonView.RPC("UpdateBulletRotation", RpcTarget.All, _direciton);
+            PhotonView.RPC("ChangeBulletLightColor", RpcTarget.All);
             _enableCollision = true;
         }
 
@@ -91,6 +94,12 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             BulletState = state;
 
             LocalInitialize();
+        }
+
+        [PunRPC]
+        private void ChangeBulletLightColor()
+        {
+            SpotLight.color = _bulletConfig.GetRightColor(BulletState);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
