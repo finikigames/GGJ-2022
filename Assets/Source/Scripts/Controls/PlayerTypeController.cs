@@ -28,7 +28,6 @@ namespace GGJ2022.Source.Scripts.Controls
         private JoystickControlInfo _controlInfo;
         private PlayerConfig _playerConfig;
         
-        private IDisposable _timer;
         private bool _ready = true;
         private ReactiveProperty<float> _timerValue;
         

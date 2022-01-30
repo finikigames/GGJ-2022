@@ -7,5 +7,7 @@ namespace GGJ2022.Source.Scripts.Game
     {
         public GameObject LocalPlayer;
         public EcsWorld World;
+
+        public string Nickname;
     }
 }

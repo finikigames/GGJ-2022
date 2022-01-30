@@ -480,6 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PhotonView: {fileID: 450652522538474798}
   PlayerTypeController: {fileID: 1884509476165034544}
+  PlayerManager: {fileID: 8170168752618928063}
 --- !u!114 &2171855280417673130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,8 +523,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.058115125}
-  m_Size: {x: 0.671875, y: 0.78028023}
+  m_Offset: {x: -0.006695032, y: -0.089233205}
+  m_Size: {x: 0.56737703, y: 0.734754}
   m_Direction: 0
 --- !u!114 &7060364948957470811
 MonoBehaviour:
@@ -591,7 +592,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
+  m_PointLightInnerRadius: 0.1955864
   m_PointLightOuterRadius: 1.23
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
