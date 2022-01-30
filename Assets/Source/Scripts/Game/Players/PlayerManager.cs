@@ -79,6 +79,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
             {
                 LocalPlayerInstance = gameObject;
                 _health = _playerConfig.Health;
+                PhotonView.RPC("RPC_CurrentHealth", RpcTarget.Others, _health);
             }
 
             // Create the UI
