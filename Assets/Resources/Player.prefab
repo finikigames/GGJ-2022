@@ -352,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PhotonView: {fileID: 450652522538474798}
   PlayerTypeController: {fileID: 1884509476165034544}
+  PlayerManager: {fileID: 8170168752618928063}
 --- !u!114 &2171855280417673130
 MonoBehaviour:
   m_ObjectHideFlags: 0

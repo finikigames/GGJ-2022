@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using GGJ2022.Source.Scripts.Game.Bullets;
 using GGJ2022.Source.Scripts.Game.Configs;
+using GGJ2022.Source.Scripts.Game.Players;
 using Photon.Pun;
 using UniRx;
 using Unity.Mathematics;
@@ -17,11 +19,12 @@ namespace GGJ2022.Source.Scripts.Controls
 
         public PhotonView PhotonView;
         public PlayerTypeController PlayerTypeController;
-        private IDisposable _timer;
+        public PlayerManager PlayerManager;
+        
         private bool _ready = true;
         private PlayerConfig _playerConfig;
-
-
+        private ReactiveProperty<float> _timerValue;
+        
         [Inject]
         public void Construct(BulletConfig bulletConfig,
                               JoystickControlInfo controlInfo,
@@ -34,28 +37,37 @@ namespace GGJ2022.Source.Scripts.Controls
             _playerConfig = playerConfig;
         }
 
-        private void Awake()
+        private void Start()
         {
             if (PhotonView.IsMine)
             {
+                _timerValue = new ReactiveProperty<float>(_playerConfig.ShootDelay);
+                _timerValue.Subscribe(value =>
+                {
+                    PlayerManager.SetCooldown(value);
+                });
+                
                 _controlInfo.FireJoystick.IsPointerUp
                     .Where(x => x && _controlInfo.ShootDirection.magnitude > _gameConfig.FireStickTreeshold && _ready).Subscribe(
                         _ =>
                         {
+                            _timerValue.Value = 0f;
                             Shoot();
                             _ready = false;
-                            StartTimer();
+                            StartCoroutine(StartTimer());
                         });
             }
         }
         
-        private void StartTimer()
+        IEnumerator StartTimer()
         {
-            _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.ShootDelay)).Subscribe(_ =>
+            while (_timerValue.Value < _playerConfig.ShootDelay)
             {
-                _ready = true;
-                _timer.Dispose();
-            });
+                _timerValue.Value += Time.deltaTime;
+                yield return null;
+            }
+            
+            _ready = true;
         }
 
 

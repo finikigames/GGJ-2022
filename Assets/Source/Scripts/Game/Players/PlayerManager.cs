@@ -11,6 +11,7 @@
 using System;
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Services;
+using GGJ2022.Source.Scripts.UI;
 using GGJ2022.Source.Scripts.UI.Player;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
@@ -38,6 +39,7 @@ namespace GGJ2022.Source.Scripts.Game.Players
         private PlayerService _playerService;
         private GameConfig _gameConfig;
         private HealthBar _healthBar;
+        private CooldownBar _cooldownBar;
         private int _myTeam;
         private TextMeshProUGUI _nickname;
 
@@ -79,17 +81,13 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 _health = _playerConfig.Health;
             }
 
-            DontDestroyOnLoad(gameObject);
-        }
-
-        public void Start()
-        {
             // Create the UI
             if (this.playerUiPrefab != null)
             {
                 GameObject _uiGo = Instantiate(this.playerUiPrefab, transform);
                 _healthBar = _uiGo.GetComponentInChildren<HealthBar>();
                 _nickname = _uiGo.GetComponentInChildren<TextMeshProUGUI>();
+                _cooldownBar = _uiGo.GetComponentInChildren<CooldownBar>();
                 _healthBar.InitializeSlider(_health);
 
                 if (PhotonView.IsMine)
@@ -107,6 +105,8 @@ namespace GGJ2022.Source.Scripts.Game.Players
             {
                 //FillCircleTeam();
             }
+            
+            DontDestroyOnLoad(gameObject);
         }
 
         [PunRPC]
@@ -115,6 +115,11 @@ namespace GGJ2022.Source.Scripts.Game.Players
             _nickname.text = nickname;
         }
 
+        public void SetCooldown(float cooldown)
+        {
+            _cooldownBar.Set(cooldown);
+        }
+        
         public void Heal(float heal)
         {
             if (_health + heal < 100)
