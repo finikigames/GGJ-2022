@@ -21,3 +21,5 @@ MonoBehaviour:
     FireStickTreeshold: 0.1
     isDeathmatch: 0
     WinScreenShowTime: 1.5
+    PlayerStartHintHideTime: 1
+    CloseButtonHideTime: 5

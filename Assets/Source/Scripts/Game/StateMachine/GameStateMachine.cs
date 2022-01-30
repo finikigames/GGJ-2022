@@ -43,10 +43,13 @@ namespace GGJ2022.Source.Scripts.Game.StateMachine
                 .InternalTransition(GameTriggers.HideResults, _gameState.HideResults)
                 .OnEntry(_gameState.OnEntry)
                 .OnEntry(_gameState.OnExit);
-            
-            _stateMachine.Fire(GameTriggers.StartInit);
         }
 
+        public void Start()
+        {
+            _stateMachine.Fire(GameTriggers.StartInit);
+        }
+        
         public void Fire(GameTriggers trigger)
         {
             _stateMachine.Fire(trigger);

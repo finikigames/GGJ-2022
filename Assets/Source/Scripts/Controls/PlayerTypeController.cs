@@ -69,6 +69,7 @@ namespace GGJ2022.Source.Scripts.Controls
 
             _controlInfo.TimerText.gameObject.SetActive(false);
             _controlInfo.ReadyText.gameObject.SetActive(true);
+            _controlInfo.ChangeTypeButton.targetGraphic.color = Color.white;
             _ready = true;
         }
 
@@ -78,6 +79,7 @@ namespace GGJ2022.Source.Scripts.Controls
             {
                 _controlInfo.TimerText.gameObject.SetActive(true);
                 _controlInfo.ReadyText.gameObject.SetActive(false);
+                _controlInfo.ChangeTypeButton.targetGraphic.color = Color.gray;
                             
                 _timerValue.Value = _playerConfig.StateSwitchDelay;
                 InvertState();
