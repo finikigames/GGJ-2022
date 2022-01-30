@@ -10,12 +10,19 @@ namespace Source.Scripts.Controls
 {
     public class PlayerAnimation : MonoBehaviour
     {
-        [Inject]
         private JoystickControlInfo _joysticks;
-        [Inject]
         private GameConfig _gameConfig;
-        [Inject]
         private PlayerConfig _playerConfig;
+
+        [Inject]
+        public void Construct(JoystickControlInfo joystickControlInfo,
+                              GameConfig gameConfig,
+                              PlayerConfig playerConfig)
+        {
+            _joysticks = joystickControlInfo;
+            _gameConfig = gameConfig;
+            _playerConfig = playerConfig;
+        }
 
         private bool _ready = true;
         private IDisposable _timer;
@@ -32,7 +39,7 @@ namespace Source.Scripts.Controls
         private static readonly int PrevVertical = Animator.StringToHash("PrevVertical");
         private static readonly int Attack = Animator.StringToHash("Attack");
 
-        private void Awake()
+        private void Start()
         {
             if (PhotonView.IsMine)
             {
@@ -86,6 +93,7 @@ namespace Source.Scripts.Controls
             _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.ShootDelay)).Subscribe(_ =>
             {
                 _ready = true;
+                _timer.Dispose();
             });
         }
 

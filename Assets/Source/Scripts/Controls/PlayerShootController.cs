@@ -54,6 +54,7 @@ namespace GGJ2022.Source.Scripts.Controls
             _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.ShootDelay)).Subscribe(_ =>
             {
                 _ready = true;
+                _timer.Dispose();
             });
         }
 
