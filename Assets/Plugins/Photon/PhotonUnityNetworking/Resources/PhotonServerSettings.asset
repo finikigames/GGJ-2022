@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 
+    AppIdRealtime: 8a361995-a194-44ac-a9da-04abbac42e01
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
@@ -27,9 +27,9 @@ MonoBehaviour:
     EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
-    NetworkLogging: 1
+    NetworkLogging: 5
   DevRegion: 
-  PunLogging: 0
+  PunLogging: 2
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
@@ -39,6 +39,25 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - StartGame
+  - RpcClearBuffer
+  - RpcNonServerOwnedTeleportFromServer
+  - RpcTeleport
+  - ChangeTypeRemote
+  - SetDamage
+  - SetHeal
+  - DeleteBullet
+  - RPC_GetTeam
+  - ShowDeathAnimation
+  - UpdateBulletRotation
+  - RPC_CurrentHealth
+  - UpdateBulletType
+  - PlayHitSound
+  - PlayShootSound
+  - RPC_ShowWinScreen
+  - ChangeBulletLightColor
+  - RPC_TeamCircle
+  - SetNicknames
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
-  DevRegionSetOnce: 0
+  ShowSettings: 1
+  DevRegionSetOnce: 1

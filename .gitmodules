@@ -1,0 +1,6 @@
+[submodule "Assets/Plugins/Miami/"]
+	path = Assets/Plugins/Miami/
+	url = https://github.com/w0dm4n/Hotline-Miami-Game.git
+[submodule "Hotline-Miami-Game"]
+	path = Hotline-Miami-Game
+	url = https://github.com/w0dm4n/Hotline-Miami-Game.git
