@@ -36,6 +36,7 @@ namespace GGJ2022.Source.Scripts.UI
         {
             CanvasGroup.DOFade(0f, _gameConfig.PlayerStartHintHideTime).onComplete += () =>
             {
+                CanvasGroup.gameObject.SetActive(false);
                 _gameStateMachine.Start();
             };
         }
