@@ -7,7 +7,6 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Spine.Unity;
 using UniRx;
-using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -23,7 +22,7 @@ namespace GGJ2022.Source.Scripts.Controls
         public ObjectState Type;
         public SpriteRenderer SpriteRenderer;
 
-        public List<AnimatorController> AnimatorStates;
+        public List<RuntimeAnimatorController> AnimatorStates;
 
         private JoystickControlInfo _controlInfo;
         private PlayerConfig _playerConfig;
@@ -104,6 +103,7 @@ namespace GGJ2022.Source.Scripts.Controls
             {
                 SwitchState.gameObject.SetActive(false);
             };
+            PhotonView.RPC("PlaySwitchStateSound", RpcTarget.All);
             //SpriteRenderer.color = Type == ObjectState.First ? Color.white : Color.red;
             Animator.runtimeAnimatorController = InvertState();
         }

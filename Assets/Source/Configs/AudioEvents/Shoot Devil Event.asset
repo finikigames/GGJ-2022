@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cd0f3c48cc5dfb4d8e0433f675b4f82, type: 3}
-  m_Name: Hit Event
+  m_Name: Shoot Devil Event
   m_EditorClassIdentifier: 
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 93c72a6d449e39849a050a9180c58a89, type: 3}
   volume:
-    min: 0
-    max: 0
+    min: 0.4
+    max: 0.5
   pitch:
-    min: 0
-    max: 0
+    min: 0.8
+    max: 0.9

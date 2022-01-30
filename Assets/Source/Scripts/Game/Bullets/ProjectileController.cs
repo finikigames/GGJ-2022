@@ -121,9 +121,16 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                     var gameObjectOther = other.gameObject.GetComponent<PhotonView>();
 
                     var playerTypeController = gameObjectOther.GetComponent<PlayerTypeController>();
-                    
-                    gameObjectOther.RPC("PlayHitSound", RpcTarget.All);
-                    
+
+                    if (playerTypeController.Type == ObjectState.First)
+                    {
+                        gameObjectOther.RPC("PlayAngelHitSound", RpcTarget.All);
+                    }
+                    else
+                    {
+                        gameObjectOther.RPC("PlayDevilHitSound", RpcTarget.All);
+                    }
+
                     _teamsManager.TryGetTeamMatesOfPlayer(PhotonView.Controller, out var teamMates);
 
                     var otherPlayer = gameObjectOther.Controller;
@@ -147,6 +154,11 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
                         else if (isNotBulletState)
                             playerManager.Damage(_playerConfig.Damage);
                     }
+                }
+
+                if (!isPlayerCollision)
+                {
+                    PhotonView.RPC("PlayWallHitSound", RpcTarget.All);
                 }
 
                 if (PhotonView.IsMine)
