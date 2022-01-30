@@ -94,7 +94,11 @@ namespace GGJ2022.Source.Scripts.Game.Players
                 {
                     _nickname.text = _gameScope.Nickname;
 
-                    PhotonView.RPC("SetNicknames", RpcTarget.Others);
+                    PhotonView.RPC("SetNicknames", RpcTarget.Others, _gameScope.Nickname);
+                }
+                else
+                {
+                    _cooldownBar.gameObject.SetActive(false);
                 }
             }
             else
