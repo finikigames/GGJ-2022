@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 7060364948957470811}
   - component: {fileID: 7810831900537205801}
   - component: {fileID: 4310287096236878525}
-  - component: {fileID: 3321537297913257479}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -462,6 +461,11 @@ MonoBehaviour:
   SwitchState: {fileID: 6586084561038423326}
   Type: 0
   SpriteRenderer: {fileID: 3477707323531388303}
+  AnimatorStates:
+  - {fileID: 9100000, guid: 2b2fbdc9d9786274e9c3e203ec8a19a0, type: 2}
+  - {fileID: 9100000, guid: 82c5077afd1e74e47bffabac85bf3865, type: 2}
+  - {fileID: 9100000, guid: 4b85bf65a2bbd994690c2e3b40f08ded, type: 2}
+  - {fileID: 9100000, guid: 766214d2a49d72d4685de65aeb6d3fcb, type: 2}
 --- !u!114 &6671124565395481592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,22 +714,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &3321537297913257479
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090748408087131110}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: cf001fa65ca043847865b080c7ac2031, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &3211369908010935423
 GameObject:
   m_ObjectHideFlags: 0

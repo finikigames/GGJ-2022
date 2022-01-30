@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players.Base;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using Spine.Unity;
 using UniRx;
+using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace GGJ2022.Source.Scripts.Controls
 {
@@ -19,14 +23,15 @@ namespace GGJ2022.Source.Scripts.Controls
         public ObjectState Type;
         public SpriteRenderer SpriteRenderer;
 
+        public List<AnimatorController> AnimatorStates;
+
         private JoystickControlInfo _controlInfo;
         private PlayerConfig _playerConfig;
         
         private IDisposable _timer;
         private bool _ready = true;
         private ReactiveProperty<float> _timerValue;
-
-
+        
         [Inject]
         public void Construct(JoystickControlInfo controlInfo,
                               PlayerConfig playerConfig)
@@ -56,7 +61,6 @@ namespace GGJ2022.Source.Scripts.Controls
                         _controlInfo.ReadyText.gameObject.SetActive(true);
                     }
                 });
-
             }
         }
 
@@ -84,7 +88,7 @@ namespace GGJ2022.Source.Scripts.Controls
                 _controlInfo.ChangeTypeButton.targetGraphic.color = Color.gray;
                             
                 _timerValue.Value = _playerConfig.StateSwitchDelay;
-                InvertState();
+                //Animator.runtimeAnimatorController = InvertState();
                 PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, Type);
 
                 StartCoroutine(StartTimer());
@@ -101,12 +105,45 @@ namespace GGJ2022.Source.Scripts.Controls
             {
                 SwitchState.gameObject.SetActive(false);
             };
-            SpriteRenderer.color = Type == ObjectState.First ? Color.white : Color.red;
+            //SpriteRenderer.color = Type == ObjectState.First ? Color.white : Color.red;
+            Animator.runtimeAnimatorController = InvertState();
         }
         
-        private void InvertState()
+        private RuntimeAnimatorController InvertState()
         {
             Type = Type == ObjectState.First ? ObjectState.Second : ObjectState.First;
+            switch (Type)
+            {
+                case ObjectState.First:
+                    return ChangeToDemon();
+                case ObjectState.Second:
+                    return ChangeToAngel();
+            }
+
+            return null;
+        }
+
+        private RuntimeAnimatorController ChangeToDemon()
+        {
+            return AnimatorStates[Random.Range(2, 4)];
+            if (PhotonNetwork.LocalPlayer.GetPhotonTeam().Code == 1)
+            {
+                return AnimatorStates[2];
+            }
+
+            return AnimatorStates[3];
+        }
+
+        private RuntimeAnimatorController ChangeToAngel()
+        {
+            return AnimatorStates[Random.Range(0, 2)];
+
+            if (PhotonNetwork.LocalPlayer.GetPhotonTeam().Code == 1)
+            {
+                return AnimatorStates[0];
+            }
+
+            return AnimatorStates[1];
         }
     }
 }
