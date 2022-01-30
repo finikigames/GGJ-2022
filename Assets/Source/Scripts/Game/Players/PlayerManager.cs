@@ -14,6 +14,7 @@ using GGJ2022.Source.Scripts.Game.Services;
 using GGJ2022.Source.Scripts.UI.Player;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
+using Photon.Pun.UtilityScripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -31,17 +32,21 @@ namespace GGJ2022.Source.Scripts.Game.Players
         #region Public Fields
 
         public PhotonView PhotonView;
+        public SpriteRenderer TeamCircle;
         private PlayerConfig _playerConfig;
         private PlayerService _playerService;
+        private GameConfig _gameConfig;
         private HealthBar _healthBar;
         private int _myTeam;
 
         [Inject]
         public void Construct(PlayerConfig playerConfig,
-                              PlayerService playerService)
+                              PlayerService playerService,
+                              GameConfig gameConfig)
         {
             _playerConfig = playerConfig;
             _playerService = playerService;
+            _gameConfig = gameConfig;
         }
 
         [Tooltip("The current Health of our player")]
@@ -83,6 +88,10 @@ namespace GGJ2022.Source.Scripts.Game.Players
             else
             {
                 Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
+            }
+            if (PhotonView.IsMine)
+            {
+                //FillCircleTeam();
             }
         }
 
@@ -132,13 +141,15 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         #region Private Methods
 
+#if UNITY_5_4_OR_NEWER
 
-		#if UNITY_5_4_OR_NEWER
-		void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+
+        void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
 		{
 			this.CalledOnLevelWasLoaded(scene.buildIndex);
 		}
-		#endif
+
+#endif
 
         #endregion
 
@@ -174,6 +185,30 @@ namespace GGJ2022.Source.Scripts.Game.Players
             _health = whichHealth;
             _healthBar.SetHealth(_health);
             CheckHealth();
+        }
+
+        private void FillCircleTeam()
+        {
+            if (_gameConfig.isDeathmatch) return;
+            var team = PhotonNetwork.LocalPlayer.GetPhotonTeam().Code;
+            if (team == 1)
+            {
+                TeamCircle.enabled = true;
+                TeamCircle.color = new Color(131, 255, 5, 80);
+            }
+
+            if (team == 2)
+            {
+                TeamCircle.enabled = true;
+                TeamCircle.color = new Color(0, 255, 237, 80);
+            }
+            PhotonView.RPC("RPC_TeamCircle", RpcTarget.Others, TeamCircle);
+        }
+
+        [PunRPC]
+        void RPC_TeamCircle(SpriteRenderer circle)
+        {
+            TeamCircle = circle;
         }
     }
 }
