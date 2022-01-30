@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using GGJ2022.Source.Scripts.Controls;
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players;
@@ -86,6 +87,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         {
             _currentState.Attack.gameObject.SetActive(false);
             _currentState.Hit.gameObject.SetActive(true);
+            DOTween.To(() => SpotLight.intensity, value => SpotLight.intensity = value, 0, _bulletConfig.LightFadeOutTime);
         }
 
         [PunRPC]
@@ -106,12 +108,12 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         {
             if (_enableCollision)
             {
+                _isDead = true;
+                PhotonView.RPC("ShowDeathAnimation", RpcTarget.All);
+             
                 _currentState ??= _currentState = StateViews[BulletState];
                 var isPlayerCollision =
                     other.gameObject.layer == LayerMask.NameToLayer(PlayerLayerController.OtherLayer);
-
-                _currentState.Attack.gameObject.SetActive(false);
-                _currentState.Hit.gameObject.SetActive(true);
 
                 // If other player
                 if (PhotonView.IsMine && isPlayerCollision)
@@ -149,8 +151,6 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
                 if (PhotonView.IsMine)
                 {
-                    _isDead = true;
-                    PhotonView.RPC("ShowDeathAnimation", RpcTarget.Others);
                     _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject); };
                 }
             }
@@ -170,9 +170,7 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
             {
                 _isDead = true;
                 
-                _currentState.Attack.gameObject.SetActive(false);
-                _currentState.Hit.gameObject.SetActive(true);
-                PhotonView.RPC("ShowDeathAnimation", RpcTarget.Others);
+                PhotonView.RPC("ShowDeathAnimation", RpcTarget.All);
                 _currentState.Hit.AnimationState.Complete += _ =>
                 {
                     PhotonNetwork.Destroy(gameObject);

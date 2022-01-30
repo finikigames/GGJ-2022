@@ -11,7 +11,8 @@ namespace GGJ2022.Source.Scripts.Game.Configs
         public LayerMask DestroyBulletLayers;
         public Color FirstTeamProjectileColor;
         public Color SecondTeamProjectileColor;
-
+        public float LightFadeOutTime;
+        
         public Color GetRightColor(ObjectState state)
             => state == ObjectState.First ? FirstTeamProjectileColor : SecondTeamProjectileColor;
     }

@@ -17,5 +17,6 @@ MonoBehaviour:
     DestroyBulletLayers:
       serializedVersion: 2
       m_Bits: 0
-    FirstTeamProjectileColor: {r: 1, g: 0, b: 0, a: 0}
-    SecondTeamProjectileColor: {r: 0.07168007, g: 0, b: 1, a: 0}
+    FirstTeamProjectileColor: {r: 1, g: 0, b: 0, a: 1}
+    SecondTeamProjectileColor: {r: 0.07168007, g: 0, b: 1, a: 1}
+    LightFadeOutTime: 0.1

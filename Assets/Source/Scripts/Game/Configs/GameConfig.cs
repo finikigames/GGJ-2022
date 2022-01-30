@@ -15,5 +15,8 @@ namespace GGJ2022.Source.Scripts.Game.Configs
         public bool isDeathmatch;
 
         public float WinScreenShowTime;
+        
+        public float PlayerStartHintHideTime;
+        public float CloseButtonHideTime;
     }
 }

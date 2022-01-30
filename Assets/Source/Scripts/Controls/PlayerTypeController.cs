@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players.Base;
 using Photon.Pun;
@@ -23,7 +24,9 @@ namespace GGJ2022.Source.Scripts.Controls
         
         private IDisposable _timer;
         private bool _ready = true;
-        
+        private ReactiveProperty<float> _timerValue;
+
+
         [Inject]
         public void Construct(JoystickControlInfo controlInfo,
                               PlayerConfig playerConfig)
@@ -32,32 +35,59 @@ namespace GGJ2022.Source.Scripts.Controls
             _playerConfig = playerConfig;
         }
 
-        private void StartTimer()
-        {
-            _timer = Observable.Interval(TimeSpan.FromSeconds(_playerConfig.StateSwitchDelay)).Subscribe(_ =>
-            {
-                _ready = true;
-                _timer.Dispose();
-            });
-        }
-        
         private void Awake()
         {
             if (PhotonView.IsMine)
             {
+                _timerValue = new ReactiveProperty<float>();
+                
                 _controlInfo.ChangeTypeButton.onClick.RemoveAllListeners();
                 _controlInfo.ChangeTypeButton.onClick.AddListener(ChangeType);
+                
+                _timerValue.Subscribe(value =>
+                {
+                    if (value > 0f)
+                    {
+                        _controlInfo.TimerText.text = String.Format("{0:0.00}", value);   
+                    }
+                    else
+                    {
+                        _controlInfo.TimerText.gameObject.SetActive(false);
+                        _controlInfo.ReadyText.gameObject.SetActive(true);
+                    }
+                });
+
             }
+        }
+
+        IEnumerator StartTimer()
+        {
+            _timerValue.Value = _playerConfig.StateSwitchDelay;
+            while (_timerValue.Value > 0.01f)
+            {
+                _timerValue.Value -= Time.deltaTime;
+                yield return null;
+            }
+
+            _controlInfo.TimerText.gameObject.SetActive(false);
+            _controlInfo.ReadyText.gameObject.SetActive(true);
+            _controlInfo.ChangeTypeButton.targetGraphic.color = Color.white;
+            _ready = true;
         }
 
         private void ChangeType()
         {
             if (_ready)
             {
+                _controlInfo.TimerText.gameObject.SetActive(true);
+                _controlInfo.ReadyText.gameObject.SetActive(false);
+                _controlInfo.ChangeTypeButton.targetGraphic.color = Color.gray;
+                            
+                _timerValue.Value = _playerConfig.StateSwitchDelay;
                 InvertState();
                 PhotonView.RPC("ChangeTypeRemote", RpcTarget.All, Type);
-                
-                StartTimer();
+
+                StartCoroutine(StartTimer());
                 _ready = false;
             }
         }
