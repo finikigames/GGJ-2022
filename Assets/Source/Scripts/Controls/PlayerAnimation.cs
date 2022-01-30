@@ -64,8 +64,8 @@ namespace Source.Scripts.Controls
 
         private void Animate()
         {
-            var horizontal = _joysticks.MovementJoystick.Horizontal * 100f + Input.GetAxis("Horizontal") * 100f;
-            var vertical = _joysticks.MovementJoystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f;
+            var horizontal = _joysticks.MovementJoystick.Horizontal + Input.GetAxis("Horizontal");
+            var vertical = _joysticks.MovementJoystick.Vertical + Input.GetAxis("Vertical");
             Vector2 newPos = new Vector2(
                 horizontal,
                 vertical);
