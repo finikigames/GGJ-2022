@@ -19,5 +19,5 @@ MonoBehaviour:
     IsEnemyHeal: 1
     FriendlyFire: 1
     FireStickTreeshold: 0.1
-    isDeathmatch: 1
+    isDeathmatch: 0
     WinScreenShowTime: 1.5
