@@ -13,5 +13,7 @@ namespace GGJ2022.Source.Scripts.Game.Configs
         public bool FriendlyFire;
         public float FireStickTreeshold;
         public bool isDeathmatch;
+
+        public float WinScreenShowTime;
     }
 }
