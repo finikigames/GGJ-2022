@@ -108,12 +108,12 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
         {
             if (_enableCollision)
             {
+                _isDead = true;
+                PhotonView.RPC("ShowDeathAnimation", RpcTarget.All);
+             
                 _currentState ??= _currentState = StateViews[BulletState];
                 var isPlayerCollision =
                     other.gameObject.layer == LayerMask.NameToLayer(PlayerLayerController.OtherLayer);
-
-                _currentState.Attack.gameObject.SetActive(false);
-                _currentState.Hit.gameObject.SetActive(true);
 
                 // If other player
                 if (PhotonView.IsMine && isPlayerCollision)
@@ -151,8 +151,6 @@ namespace GGJ2022.Source.Scripts.Game.Bullets
 
                 if (PhotonView.IsMine)
                 {
-                    _isDead = true;
-                    PhotonView.RPC("ShowDeathAnimation", RpcTarget.Others);
                     _currentState.Hit.AnimationState.Complete += entry => { PhotonNetwork.Destroy(gameObject); };
                 }
             }

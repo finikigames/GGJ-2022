@@ -56,6 +56,7 @@ MonoBehaviour:
   - PlayShootSound
   - RPC_ShowWinScreen
   - ChangeBulletLightColor
+  - RPC_TeamCircle
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
