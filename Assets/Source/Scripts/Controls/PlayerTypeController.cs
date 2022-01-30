@@ -103,6 +103,7 @@ namespace GGJ2022.Source.Scripts.Controls
             {
                 SwitchState.gameObject.SetActive(false);
             };
+            PhotonView.RPC("PlaySwitchStateSound", RpcTarget.All);
             //SpriteRenderer.color = Type == ObjectState.First ? Color.white : Color.red;
             Animator.runtimeAnimatorController = InvertState();
         }

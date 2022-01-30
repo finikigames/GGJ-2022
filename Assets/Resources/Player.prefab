@@ -651,8 +651,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 4310287096236878525}
-  HitEvent: {fileID: 11400000, guid: b88d7a89ff7d3e54f9023e0b5cfff236, type: 2}
-  ShootEvent: {fileID: 11400000, guid: 23be2b441099f5448be47165ba30d639, type: 2}
+  HitDevilEvent: {fileID: 11400000, guid: b88d7a89ff7d3e54f9023e0b5cfff236, type: 2}
+  HitAngelEvent: {fileID: 11400000, guid: 51d561784c4e2a848a01200115a1e27f, type: 2}
+  ShootAngelEvent: {fileID: 11400000, guid: dca515a304dac4149bba4822e4e32f61, type: 2}
+  ShootDevilEvent: {fileID: 11400000, guid: 23be2b441099f5448be47165ba30d639, type: 2}
+  SwtichStateEvent: {fileID: 11400000, guid: b5947bca31154a940b6d6078dab2bc6e, type: 2}
+  HitWallEvent: {fileID: 11400000, guid: 41554fd11bff7654188ef655bb72eb13, type: 2}
 --- !u!82 &4310287096236878525
 AudioSource:
   m_ObjectHideFlags: 0

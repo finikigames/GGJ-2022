@@ -6,19 +6,47 @@ namespace GGJ2022.Source.Scripts.Controls
     public class PlayerSoundController : MonoBehaviour
     {
         public AudioSource AudioSource;
-        public SimpleAudioEvent HitEvent;
-        public SimpleAudioEvent ShootEvent;
+        public SimpleAudioEvent HitDevilEvent;
+        public SimpleAudioEvent HitAngelEvent;
+        public SimpleAudioEvent ShootAngelEvent;
+        public SimpleAudioEvent ShootDevilEvent;
+        public SimpleAudioEvent SwtichStateEvent;
+        public SimpleAudioEvent HitWallEvent;
 
         [PunRPC]
-        private void PlayShootSound()
+        private void PlayDevilShootSound()
         {
-            ShootEvent.Play(AudioSource);
+            ShootDevilEvent.Play(AudioSource);
+        } 
+        
+        [PunRPC]
+        private void PlayAngelShootSound()
+        {
+            ShootAngelEvent.Play(AudioSource);
         }
-
+        
         [PunRPC]
-        private void PlayHitSound()
+        private void PlayDevilHitSound()
         {
-            HitEvent.Play(AudioSource);
+            HitDevilEvent.Play(AudioSource);
+        } 
+        
+        [PunRPC]
+        private void PlayAngelHitSound()
+        {
+            HitAngelEvent.Play(AudioSource);
+        }
+        
+        [PunRPC]
+        private void PlaySwitchStateSound()
+        {
+            SwtichStateEvent.Play(AudioSource);
+        } 
+        
+        [PunRPC]
+        private void PlayWallHitSound()
+        {
+            HitWallEvent.Play(AudioSource);
         }
     }
 }

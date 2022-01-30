@@ -3,6 +3,7 @@ using System.Collections;
 using GGJ2022.Source.Scripts.Game.Bullets;
 using GGJ2022.Source.Scripts.Game.Configs;
 using GGJ2022.Source.Scripts.Game.Players;
+using GGJ2022.Source.Scripts.Game.Players.Base;
 using Photon.Pun;
 using UniRx;
 using Unity.Mathematics;
@@ -73,10 +74,16 @@ namespace GGJ2022.Source.Scripts.Controls
 
         private void Shoot()
         {
-            PhotonView.RPC("PlayShootSound", RpcTarget.All);
-            
             var currentType = PlayerTypeController.Type;
-           
+            if (currentType == ObjectState.First)
+            {
+                PhotonView.RPC("PlayAngelShootSound", RpcTarget.All);
+            }
+            else
+            {
+                PhotonView.RPC("PlayDevilShootSound", RpcTarget.All);
+            }
+
             var bullet = PhotonNetwork.Instantiate(_gameConfig.BulletPrefab.name, transform.position, quaternion.identity);
             var projectileController = bullet.GetComponent<ProjectileController>();
             projectileController.Initialize(currentType);
