@@ -54,6 +54,7 @@ MonoBehaviour:
   - UpdateBulletType
   - PlayHitSound
   - PlayShootSound
+  - RPC_ShowWinScreen
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
