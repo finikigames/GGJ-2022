@@ -205,13 +205,26 @@ namespace GGJ2022.Source.Scripts.Game.Players
 
         void CheckHealth()
         {
-            if (PhotonView.IsMine && !_isLeft && _health <= 0f)
+            if (!_isLeft && _health <= 0f)
+            {
+                PhotonView.RPC("PlayDeathAnimation", RpcTarget.All);
+            }
+        }
+
+        [PunRPC]
+        private void PlayDeathAnimation()
+        {
+            if (PhotonView.IsMine)
             {
                 Death.gameObject.SetActive(true);
                 Death.state.Complete += entry =>
                 {
                     PhotonNetwork.LeaveRoom();
                 };
+            }
+            else
+            {
+                Death.gameObject.SetActive(true);
             }
         }
 
